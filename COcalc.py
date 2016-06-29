@@ -3,9 +3,8 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from PyQt4 import QtGui
 import sys
-#Kent's comment
+#steph
 #test
-#another comment
 
 if __name__ == "__main__":
 
