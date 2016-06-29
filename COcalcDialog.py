@@ -20,16 +20,32 @@ class COcalcDialog(QDialog, ui_COcalc.Ui_CO_Calculator):
 
     def Apply(self, parent=None):
         a = []
-
-        for i in np.arange(1, 21, 1):
-            temp = self.HUvalues.item(i, 1)
-
-            if (temp.text()):
-                a.append(int(temp.text()))
+        allRows = self.HUvalues.rowCount()
+        for i in np.arange(0, allRows+1, 1):
+            temp = self.HUvalues.item(i,0)
+            if (temp):
+                a.append(eval(str(temp.text())))
         a = np.array(a)
-        print(a)
+        #ctypes.windll.user32.MessageBoxA(0, "Hello!", "test", 1)
 
-        ctypes.windll.user32.MessageBoxA(0, "Hello!", "test", 1)
+
+        self.patient.data = a
+        self.patient.offset = b
+        self.patient.data = a - b
+        self.patient.getCoeffs(0)
+        self.patient.getR2()
+        self.patient.tpeak = self.patient.alpha * self.patient.B
+        self.patient.getContData()
+        self.patient.getStats()
+
+        self.ui.widget.canvas.ax.clear()
+        self.ui.widget.canvas.ax.plot(self.patient.contTimes, self.patient.contData, self.patient.times, self.patient.data, 'bs')
+        self.ui.widget.canvas.draw()
+        self.ui.lineEdit_24.setText("%.7s" % str(person1.CO))
+        self.ui.lineEdit_23.setText("%.7s" % str(person1.AUC))
+        self.ui.lineEdit_25.setText("%.7s" % str(person1.R2))
+
+        print(person1.CO)
 
     def Reset(self, parent=None):
         self.HUvalues.clearContents()
@@ -44,20 +60,20 @@ class COcalcDialog(QDialog, ui_COcalc.Ui_CO_Calculator):
         self.standardError.clear()
         self.baselineInput.clear()
 
-        patient.number = 0
-        patient.data = 0
-        patient.offset = 0
-        patient.shift = 0
-        patient.A = 0
-        patient.alpha = 0
-        patient.B = 0
-        patient.times = 0
-        patient.fitdata = 0
-        patient.R2 = 0
-        patient.contTimes = 0
-        patient.contData = 0
-        patient.AUC = 0
-        patient.CO = 0
+        self.patient.number = 0
+        self.patient.data = 0
+        self.patient.offset = 0
+        self.patient.shift = 0
+        self.patient.A = 0
+        self.patient.alpha = 0
+        self.patient.B = 0
+        self.patient.times = 0
+        self.patient.fitdata = 0
+        self.patient.R2 = 0
+        self.patient.contTimes = 0
+        self.patient.contData = 0
+        self.patient.AUC = 0
+        self.patient.CO = 0
 
 
 
