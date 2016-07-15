@@ -48,6 +48,7 @@ class COcalcDialog(QDialog, ui_COcalc.Ui_CO_Calculator):
         print(person1.CO)
 
     def Reset(self, parent=None):
+        self.plotwidget.ax.clear()
         self.HUvalues.clearContents()
         self.AUC.clear()
         self.alpha.clear()
