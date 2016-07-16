@@ -1,26 +1,25 @@
 import numpy as np
+from COUtilities import gammaFunc, getR2, getContData, getStats, GVCurveFit
 from scipy.optimize import curve_fit
 
 class Patient:
-    def __init__(
-            self):  # makes a 'person' object with the number (ex. 0-93) and data array.  Other variables are 0 here but they get filled in in other methods.  Need to input data and offset
-        self.number = 0
+    def __init__(self):  # makes a 'person' object.  Other variables are 0 here but they get filled in in other methods.
+        #self.number = 0
         self.data = 0
         self.offset = 0
         self.shift = 0
         self.A = 0
         self.alpha = 0
-        self.B = 0
+        self.beta = 0
         self.times = 0
         self.fitdata = 0
         self.R2 = 0
-        self.contTimes = 0
-        self.contData = 0
+        self.contTimes = 0 #This holds 'continuous', i.e. higher res times for smooth curve plot
+        self.contData = 0 #This holds 'continuous' GV curve data for smooth curve plotting.
         self.AUC = 0
         self.CO = 0
-
-    def gammaFunc(self, tau, A, alpha, B):  # defines the gamma variate function
-        return A * tau ** alpha * np.exp(-tau / B)
+        self.TTP = 0
+        self.MTT = 0
 
     def getCoeffs(self, shift):  # uses the curvefit function to get coeffs.  Takes in the time shift as parameter
         self.shift = shift
