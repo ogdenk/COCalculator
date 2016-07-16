@@ -15,7 +15,7 @@ class COcalcDialog(QDialog, ui_COcalc.Ui_CO_Calculator):
         self.HUtoIodineConversion.setPlainText("24")
         self.buttonBox.button(QtGui.QDialogButtonBox.Apply).clicked.connect(self.Apply)
         self.buttonBox.button(QtGui.QDialogButtonBox.Reset).clicked.connect(self.Reset)
-        self.patient = PatientData.Patient
+        self.patient = PatientData.Patient # this is the object that holds the data and does the calculations
         self.Reset
 
     def Apply(self, parent=None):
@@ -36,16 +36,16 @@ class COcalcDialog(QDialog, ui_COcalc.Ui_CO_Calculator):
         self.patient.getR2()
         self.patient.tpeak = self.patient.alpha * self.patient.B
         self.patient.getContData()
-        self.patient.getStats()
+        self.patient.calcCO()
 
         self.ui.widget.canvas.ax.clear()
         self.ui.widget.canvas.ax.plot(self.patient.contTimes, self.patient.contData, self.patient.times, self.patient.data, 'bs')
         self.ui.widget.canvas.draw()
-        self.ui.lineEdit_24.setText("%.7s" % str(person1.CO))
-        self.ui.lineEdit_23.setText("%.7s" % str(person1.AUC))
-        self.ui.lineEdit_25.setText("%.7s" % str(person1.R2))
+        self.ui.lineEdit_24.setText("%.7s" % str(self.patient.CO))
+        self.ui.lineEdit_23.setText("%.7s" % str(self.patient.AUC))
+        self.ui.lineEdit_25.setText("%.7s" % str(self.patient.R2))
 
-        print(person1.CO)
+        print(self.patient.CO)
 
     def Reset(self, parent=None):
         self.plotwidget.ax.clear()
