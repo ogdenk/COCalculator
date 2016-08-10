@@ -30,8 +30,8 @@ class COcalcDialog(QDialog, ui_COcalc.Ui_CO_Calculator):
 
 
         self.patient.data = a
-        self.patient.offset = b
-        self.patient.data = a - b
+        self.patient.offset = b #error: b not defined. offset = t0
+        self.patient.data = a - b #if offset is a value, we need to make 'b' an array of the same size as 'a' to subtract?
         self.patient.getCoeffs(0)
         self.patient.getR2()
         self.patient.tpeak = self.patient.alpha * self.patient.B
@@ -48,7 +48,7 @@ class COcalcDialog(QDialog, ui_COcalc.Ui_CO_Calculator):
         print(self.patient.CO)
 
     def Reset(self, parent=None):
-        self.plotwidget.ax.clear()#ax gives error
+        self.plotwidget.axes.clear()#ax gives error. changed to axes. reset works ok now
         self.HUvalues.clear()
         self.AUC.clear()
         self.alpha.clear()

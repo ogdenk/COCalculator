@@ -7,7 +7,7 @@ class Patient:
         #self.number = 0
         self.data = 0
         self.offset = 0
-        self.shift = 0
+        self.shift = 0 # what is 'shift'?
         self.A = 0
         self.alpha = 0
         self.beta = 0
@@ -31,6 +31,12 @@ class Patient:
         temp=0
         # NEED to do some checking on the data to make sure that there are values available
         # someting like IF(self.data.len() =0) then exit
+        #if (self.data.len() = 0):
+        #    exit () #or return()?
+        #else:
+
+
+
 
     def calcCO(self):  #Do the actual CO calculation after the curve fitting is done
         temp=0
