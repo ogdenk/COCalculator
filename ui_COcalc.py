@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'COcalc.ui'
 #
-# Created: Sat Jul 16 09:20:46 2016
+# Created: Thu Aug 11 15:24:12 2016
 #      by: PyQt4 UI code generator 4.11.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -26,7 +26,7 @@ except AttributeError:
 class Ui_CO_Calculator(object):
     def setupUi(self, CO_Calculator):
         CO_Calculator.setObjectName(_fromUtf8("CO_Calculator"))
-        CO_Calculator.resize(800, 600)
+        CO_Calculator.resize(803, 597)
         self.buttonBox = QtGui.QDialogButtonBox(CO_Calculator)
         self.buttonBox.setGeometry(QtCore.QRect(320, 570, 471, 32))
         self.buttonBox.setLayoutDirection(QtCore.Qt.LeftToRight)
@@ -36,6 +36,7 @@ class Ui_CO_Calculator(object):
         self.buttonBox.setObjectName(_fromUtf8("buttonBox"))
         self.HUvalues = QtGui.QTableWidget(CO_Calculator)
         self.HUvalues.setGeometry(QtCore.QRect(40, 20, 141, 571))
+        self.HUvalues.setMouseTracking(False)
         self.HUvalues.setRowCount(20)
         self.HUvalues.setColumnCount(1)
         self.HUvalues.setObjectName(_fromUtf8("HUvalues"))
