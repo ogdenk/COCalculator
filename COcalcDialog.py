@@ -10,10 +10,6 @@ from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as Canvas
 from matplotlib.figure import Figure
 #from matplotlib import rcParams
 
-from matplotlib.figure import Figure
-from matplotlib.backends.backend_qt4agg import (
-    FigureCanvasQTAgg as FigureCanvas)
-
 import numpy as np
 import sys
 
@@ -72,11 +68,6 @@ class COcalcDialog(QDialog, ui_COcalc.Ui_CO_Calculator):
         #self.patient.getContData()
         #self.patient.calcCO()
 
-        #this doesnt work:
-        fig = Figure()
-        self.plotwidget.canvas = FigureCanvas(fig)
-        self.plotwidget.emptyfig = {}
-
         self.plotwidget.axes.clear()
         self.plotwidget.axes.autoscale(enable = True, axis = 'both', tight = None)
 
@@ -85,7 +76,7 @@ class COcalcDialog(QDialog, ui_COcalc.Ui_CO_Calculator):
         #print(s)
         t = self.timeInterval.toPlainText() #type str
         #print(t)
-        x = np.arange(0, 100, int(t), np.dtype(np.int32)) #makes x-axis in terms of entered time intervals.(int type i/p)
+        x = np.arange(0, 100, int(t), np.dtype(np.int32)) #makes x-axis in terms of entered time intervals.(int i/p)
         # have to turn all items into int first (is int ok? if not, linspace is better than arange)
         xvalues = ([])
         includedx = self.patient.data.size
@@ -103,6 +94,8 @@ class COcalcDialog(QDialog, ui_COcalc.Ui_CO_Calculator):
         self.plotwidget.axes.set_title([''])
         self.plotwidget.axes.set_xlabel(['Time (s)'])
         self.plotwidget.axes.set_ylabel(['Concentration (Cmg)/I'])
+        self.plotwidget.axes.set_xticklabels(t) #range(0,xvalues)
+        #self.plotwidget.axes.set_yticklabels()
         self.plotwidget.draw()
 
         #self.ui.plotwidget.canvas.ax.plot(self.patient.contTimes, self.patient.contData, self.patient.times, self.patient.data, 'bs')
@@ -140,8 +133,15 @@ class COcalcDialog(QDialog, ui_COcalc.Ui_CO_Calculator):
         self.patient.AUC = 0
         self.patient.CO = 0
 
-        #self.plotwidget.axes.clear()
-        self.plotwidget.emptyfig = self.plotwidget.fig
+        #self.plotwidget.plt.delaxes()
+        clearx = []
+        cleary = []
+        clearline = self.plotwidget.axes.plot(clearx, cleary)
+        self.plotwidget.axes.set_title('')
+        self.plotwidget.axes.set_xlabel('')
+        self.plotwidget.axes.set_ylabel('')
+        self.plotwidget.draw()
+
 
 
 
