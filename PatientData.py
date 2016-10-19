@@ -10,7 +10,7 @@ class Patient:
         self.shift = 0 # what is 'shift'?
         self.A = 0
         self.alpha = 0
-        self.Beta = 0
+        self.beta = 0
         self.times = 0
         self.fitdata = 0
         self.R2 = 0
@@ -24,8 +24,8 @@ class Patient:
     def getCoeffs(self, shift):  # uses the curvefit function to get coeffs.  Takes in the time shift as parameter
         self.shift = shift
         self.times = np.arange(self.shift, self.shift + len(self.data) * 2, 2)
-        popt, pcov = curve_fit(gammaFunc, self.times, self.data, maxfev=50000) #removed self. in front of gammaFunc
-        self.A, self.alpha, self.Beta = popt[0], popt[1], popt[2]  # popt is the coeff array. changed B's to betas to match line13
+        popt, pcov = curve_fit(gammaFunc, self.times, self.data, maxfev=50000)
+        self.A, self.alpha, self.beta = popt[0], popt[1], popt[2]  # popt is the coeff array.
 
     def findOffset(self): #Find the best offset time for the given data
         temp=0

@@ -61,22 +61,29 @@ class COcalcDialog(QDialog, ui_COcalc.Ui_CO_Calculator):
 
         b = int(self.baselineInput.toPlainText())
 
-        self.patient.data = a
+        self.patient.offset = b
         self.patient.data = a - b
-        #self.patient.getCoeffs(0)
-        #self.patient.getR2()
-        #self.patient.tpeak = self.patient.alpha * self.patient.beta
-        #self.patient.getContData()
-        #self.patient.calcCO()
+        self.patient.getCoeffs(self.patient.shift) #error: patient has no attribute 'shift'
+        self.patient.getR2()
+        self.patient.tpeak = self.patient.alpha * self.patient.beta
+        self.patient.getContData()
+        self.patient.calcCO()
+
+        self.alpha.setPlainText(str(self.patient.alpha))
+        self.beta.setPlainText(str(self.patient.beta))
+        #self.t0.setPlainText(str(self.patient.)
+        self.cardiacOutput.setPlainText(str(self.patient.CO))
+        self.AUC.setPlainText(str(self.patient.AUC))
+        self.rsquared.setPlainText(str(self.patient.R2))
+        self.peakTime.setPlainText(str(self.patient.tpeak))
+        #print(self.patient.CO)
 
         self.plotwidget.axes.clear()
         self.plotwidget.axes.autoscale(enable = True, axis = 'both', tight = None)
 
         #print(self.patient.data.dtype) type int32
         #s = self.patient.data.size #type int
-        #print(s)
         t = self.timeInterval.toPlainText() #type str
-        #print(t)
         x = np.arange(0, 100, int(t), np.dtype(np.int32)) #makes x-axis in terms of entered time intervals.(int i/p)
         # have to turn all items into int first (is int ok? if not, linspace is better than arange)
         xvalues = ([])
@@ -89,8 +96,9 @@ class COcalcDialog(QDialog, ui_COcalc.Ui_CO_Calculator):
         #print(xvalues)
 
         line1 = self.plotwidget.axes.plot(xvalues, self.patient.data)
-
         self.plotwidget.axes.legend((line1), ['Patient data'])
+        line2 = self.plotwidget.axes.plot(self.patient.contTimes, self.patient.contData, self.patient.times, self.patient.data)
+        self.plotwidget.axes.legend((line2), ['Curve Fit'])
 
         self.plotwidget.axes.set_title([''])
         self.plotwidget.axes.set_xlabel(['Time (s)'])
@@ -98,13 +106,6 @@ class COcalcDialog(QDialog, ui_COcalc.Ui_CO_Calculator):
         self.plotwidget.axes.set_xticklabels(t) #range(0,xvalues)
         #self.plotwidget.axes.set_yticklabels()
         self.plotwidget.draw()
-
-        #self.ui.plotwidget.canvas.ax.plot(self.patient.contTimes, self.patient.contData, self.patient.times, self.patient.data, 'bs')
-        #self.ui.widget.canvas.draw()
-        #self.ui.lineEdit_24.setText("%.7s" % str(self.patient.CO))
-        #self.ui.lineEdit_23.setText("%.7s" % str(self.patient.AUC))
-        #self.ui.lineEdit_25.setText("%.7s" % str(self.patient.R2))
-        #print(self.patient.CO)
 
     def Reset(self, parent=None):
         self.HUvalues.clear()
