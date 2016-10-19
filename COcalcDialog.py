@@ -59,7 +59,7 @@ class COcalcDialog(QDialog, ui_COcalc.Ui_CO_Calculator):
                 a.append([eval(str(temp.text()))])
         a = np.array(a) #type int32
 
-        b = int(self.baselineInput.text())
+        b = int(self.baselineInput.toPlainText())
 
         self.patient.data = a
         #self.patient.offset = b #error: b not defined. offset = t0
