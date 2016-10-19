@@ -62,8 +62,7 @@ class COcalcDialog(QDialog, ui_COcalc.Ui_CO_Calculator):
         b = int(self.baselineInput.toPlainText())
 
         self.patient.data = a
-        #self.patient.offset = b #error: b not defined. offset = t0
-        #self.patient.data = a - b
+        self.patient.data = a - b
         #self.patient.getCoeffs(0)
         #self.patient.getR2()
         #self.patient.tpeak = self.patient.alpha * self.patient.beta
