@@ -59,9 +59,11 @@ class COcalcDialog(QDialog, ui_COcalc.Ui_CO_Calculator):
                 a.append([eval(str(temp.text()))])
         a = np.array(a) #type int32
 
+        b = int(self.baselineInput.text())
+
         self.patient.data = a
         #self.patient.offset = b #error: b not defined. offset = t0
-        #self.patient.data = a - b #if offset is a value, do we need to make 'b' an array of the same size as 'a' to subtract?
+        #self.patient.data = a - b
         #self.patient.getCoeffs(0)
         #self.patient.getR2()
         #self.patient.tpeak = self.patient.alpha * self.patient.beta
