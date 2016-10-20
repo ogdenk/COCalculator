@@ -66,7 +66,7 @@ class COcalcDialog(QDialog, ui_COcalc.Ui_CO_Calculator):
         self.patient.offset = b
         self.patient.data = a - b
         self.patient.getCoeffs(0)#TypeError:unbound method getCoeffs() must be called with Patient instance as first argument(got int instance instead)
-        self.utilities.getR2(self)
+        self.utilities.getR2(self.utilities)
         self.patient.tpeak = self.patient.alpha * self.patient.beta
         self.utilities.getContData()
         self.patient.calcCO()
