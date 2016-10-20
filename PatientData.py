@@ -27,6 +27,7 @@ class Patient:
         popt, pcov = curve_fit(gammaFunc, self.times, self.data, maxfev=50000)
         self.A, self.alpha, self.beta = popt[0], popt[1], popt[2]  # popt is the coeff array.
 
+
     def findOffset(self): #Find the best offset time for the given data
         temp=0
         # NEED to do some checking on the data to make sure that there are values available

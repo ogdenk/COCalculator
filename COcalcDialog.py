@@ -4,6 +4,7 @@ from PyQt4 import QtCore, QtGui
 import ui_COcalc
 import ctypes
 import PatientData
+import COUtilities
 
 from matplotlib import pyplot as plt
 from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as Canvas
@@ -35,6 +36,7 @@ class COcalcDialog(QDialog, ui_COcalc.Ui_CO_Calculator):
         self.buttonBox.button(QtGui.QDialogButtonBox.Apply).clicked.connect(self.Apply)
         self.buttonBox.button(QtGui.QDialogButtonBox.Reset).clicked.connect(self.Reset)
         self.patient = PatientData.Patient # this is the object that holds the data and does the calculations
+        self.utilities = COUtilities
         """
         self.HUvalues = myTableWidget(CO_Calculator)
         self.HUvalues.setGeometry(QtCore.QRect(40, 20, 141, 571))
@@ -63,10 +65,10 @@ class COcalcDialog(QDialog, ui_COcalc.Ui_CO_Calculator):
 
         self.patient.offset = b
         self.patient.data = a - b
-        self.patient.getCoeffs(self.patient.shift) #error: patient has no attribute 'shift'
-        self.patient.getR2()
+        self.patient.getCoeffs(0)#TypeError:unbound method getCoeffs() must be called with Patient instance as first argument(got int instance instead)
+        self.utilities.getR2(self)
         self.patient.tpeak = self.patient.alpha * self.patient.beta
-        self.patient.getContData()
+        self.utilities.getContData()
         self.patient.calcCO()
 
         self.alpha.setPlainText(str(self.patient.alpha))
