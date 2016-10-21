@@ -1,6 +1,6 @@
 import numpy as np
 from scipy.optimize import curve_fit
-
+import PatientData
 
 def gammaFunc(tau, A, alpha, beta):  # evaluates the gamma variate function.
     return A * tau ** alpha * np.exp(-tau / beta)

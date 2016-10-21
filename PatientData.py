@@ -6,8 +6,8 @@ class Patient:
     def __init__(self):  # makes a Patient object.  Other variables are 0 here but they get filled in in other methods.
         #self.number = 0
         self.data = 0
-        self.offset = 0
-        self.shift = 0 # what is 'shift'?
+        self.offset = 0 #is this t0?
+        self.shift = 0 # what is 'shift'? user input? or time offset calculated from findoffset?
         self.A = 0
         self.alpha = 0
         self.beta = 0

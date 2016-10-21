@@ -65,13 +65,13 @@ class COcalcDialog(QDialog, ui_COcalc.Ui_CO_Calculator):
 
         self.patient.offset = b
         self.patient.data = a - b
-        self.patient.getCoeffs(0)#TypeError:unbound method getCoeffs() must be called with Patient instance as first argument(got int instance instead)
+        self.patient.getCoeffs(self.patient, self.patient.shift) #shift? AttributeError: class Patient has no attribute 'shift'
         self.utilities.getR2(self.utilities)
         self.patient.tpeak = self.patient.alpha * self.patient.beta
-        self.utilities.getContData()
-        self.patient.calcCO()
+        self.utilities.getContData(self.utilities)
+        self.patient.calcCO(self.patient)
 
-        self.alpha.setPlainText(str(self.patient.alpha))
+        self.alpha.setPlainText(str(self.patient.alpha)) #unresolved attribute instance for Patient class for alpha, removed 'patient'
         self.beta.setPlainText(str(self.patient.beta))
         #self.t0.setPlainText(str(self.patient.)
         self.cardiacOutput.setPlainText(str(self.patient.CO))
