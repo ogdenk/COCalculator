@@ -54,13 +54,17 @@ class COcalcDialog(QDialog, ui_COcalc.Ui_CO_Calculator):
         self.Reset
 
     def Apply(self, parent=None):
-        a = ([])
+        a = []
+        testarray=[]
         allRows = self.HUvalues.rowCount()
         for i in np.arange(0, allRows+1, 1):
             temp = self.HUvalues.item(i,0)
-            if (temp):
-                a.append([float(eval(str(temp.text())))])
+            if temp:
+                HUValText =  float(temp.text())
+                testarray.append(HUValText)
+                a.append(float(temp.text()))
         a = np.array(a) #type int32
+        testarray = np.array(testarray)
 
         b = float(self.baselineInput.toPlainText())
 
