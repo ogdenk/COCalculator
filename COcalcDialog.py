@@ -35,8 +35,9 @@ class COcalcDialog(QDialog, ui_COcalc.Ui_CO_Calculator):
         self.HUtoIodineConversion.setPlainText("24")
         self.buttonBox.button(QtGui.QDialogButtonBox.Apply).clicked.connect(self.Apply)
         self.buttonBox.button(QtGui.QDialogButtonBox.Reset).clicked.connect(self.Reset)
-        self.patient = PatientData.Patient # this is the object that holds the data and does the calculations
+        self.patient = PatientData.Patient() # this is the object that holds the data and does the calculations
         self.utilities = COUtilities
+
         """
         self.HUvalues = myTableWidget(CO_Calculator)
         self.HUvalues.setGeometry(QtCore.QRect(40, 20, 141, 571))
@@ -58,18 +59,19 @@ class COcalcDialog(QDialog, ui_COcalc.Ui_CO_Calculator):
         for i in np.arange(0, allRows+1, 1):
             temp = self.HUvalues.item(i,0)
             if (temp):
-                a.append([eval(str(temp.text()))])
+                a.append([float(eval(str(temp.text())))])
         a = np.array(a) #type int32
 
-        b = int(self.baselineInput.toPlainText())
+        b = float(self.baselineInput.toPlainText())
 
         self.patient.offset = b
         self.patient.data = a - b
-        self.patient.getCoeffs(self.patient, self.patient.shift) #shift? AttributeError: class Patient has no attribute 'shift'
-        self.utilities.getR2(self.utilities)
+
+        self.patient.getCoeffs()
+        self.utilities.getR2()
         self.patient.tpeak = self.patient.alpha * self.patient.beta
-        self.utilities.getContData(self.utilities)
-        self.patient.calcCO(self.patient)
+        self.utilities.getContData()
+        self.patient.calcCO()
 
         self.alpha.setPlainText(str(self.patient.alpha)) #unresolved attribute instance for Patient class for alpha, removed 'patient'
         self.beta.setPlainText(str(self.patient.beta))

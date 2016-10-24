@@ -5,7 +5,7 @@ from scipy.optimize import curve_fit
 class Patient:
     def __init__(self):  # makes a Patient object.  Other variables are 0 here but they get filled in in other methods.
         #self.number = 0
-        self.data = 0
+        self.data = []
         self.offset = 0 #is this t0?
         self.shift = 0 # what is 'shift'? user input? or time offset calculated from findoffset?
         self.A = 0
@@ -21,8 +21,7 @@ class Patient:
         self.TTP = 0
         self.MTT = 0
 
-    def getCoeffs(self, shift):  # uses the curvefit function to get coeffs.  Takes in the time shift as parameter
-        self.shift = shift
+    def getCoeffs(self):  # uses the curvefit function to get coeffs.  Takes in the time shift as parameter
         self.times = np.arange(self.shift, self.shift + len(self.data) * 2, 2)
         popt, pcov = curve_fit(gammaFunc, self.times, self.data, maxfev=50000)
         self.A, self.alpha, self.beta = popt[0], popt[1], popt[2]  # popt is the coeff array.
