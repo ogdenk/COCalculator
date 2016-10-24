@@ -12,12 +12,7 @@ def GVCurveFit(shift, times, data):  # uses the curvefit function to get coeffs.
     return popt
 
 
-def getR2(self):  # calculates the R2 ##AttributeError: 'COcalcDialog' object has no attribute 'A'
-    self.fitData = self.A * (self.times ** self.alpha) * np.exp(-self.times / self.beta)
-    dataMean = sum(self.data) / len(self.data)
-    SStot = sum((self.data - dataMean) ** 2)
-    SSres = sum((self.data - self.fitData) ** 2)
-    self.R2 = 1 - (SSres / SStot)
+
 
 def getContData(self):  # uses the coeffs to make a more continuous dataset
     self.contTimes = np.arange(0, 50, .01)

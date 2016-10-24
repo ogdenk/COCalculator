@@ -26,6 +26,12 @@ class Patient:
         popt, pcov = curve_fit(gammaFunc, self.times, self.data, maxfev=50000)
         self.A, self.alpha, self.beta = popt[0], popt[1], popt[2]  # popt is the coeff array.
 
+    def getR2(self):  # calculates the R2
+        self.fitData = self.A * (self.times ** self.alpha) * np.exp(-self.times / self.beta)
+        dataMean = sum(self.data) / len(self.data)
+        SStot = sum((self.data - dataMean) ** 2)
+        SSres = sum((self.data - self.fitData) ** 2)
+        self.R2 = 1 - (SSres / SStot)
 
     def findOffset(self): #Find the best offset time for the given data
         temp=0

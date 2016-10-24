@@ -36,7 +36,6 @@ class COcalcDialog(QDialog, ui_COcalc.Ui_CO_Calculator):
         self.buttonBox.button(QtGui.QDialogButtonBox.Apply).clicked.connect(self.Apply)
         self.buttonBox.button(QtGui.QDialogButtonBox.Reset).clicked.connect(self.Reset)
         self.patient = PatientData.Patient() # this is the object that holds the data and does the calculations
-        self.utilities = COUtilities
 
         """
         self.HUvalues = myTableWidget(CO_Calculator)
@@ -55,16 +54,12 @@ class COcalcDialog(QDialog, ui_COcalc.Ui_CO_Calculator):
 
     def Apply(self, parent=None):
         a = []
-        testarray=[]
         allRows = self.HUvalues.rowCount()
         for i in np.arange(0, allRows+1, 1):
             temp = self.HUvalues.item(i,0)
             if temp:
-                HUValText =  float(temp.text())
-                testarray.append(HUValText)
                 a.append(float(temp.text()))
         a = np.array(a) #type int32
-        testarray = np.array(testarray)
 
         b = float(self.baselineInput.toPlainText())
 
@@ -72,7 +67,7 @@ class COcalcDialog(QDialog, ui_COcalc.Ui_CO_Calculator):
         self.patient.data = a - b
 
         self.patient.getCoeffs()
-        self.utilities.getR2()
+        self.COUtilites.getR2()
         self.patient.tpeak = self.patient.alpha * self.patient.beta
         self.utilities.getContData()
         self.patient.calcCO()
@@ -89,11 +84,11 @@ class COcalcDialog(QDialog, ui_COcalc.Ui_CO_Calculator):
         self.plotwidget.axes.clear()
         self.plotwidget.axes.autoscale(enable = True, axis = 'both', tight = None)
 
-        #print(self.patient.data.dtype) type int32
-        #s = self.patient.data.size #type int
+        #print(self.patient.data.dtype) #type?
+        #s = self.patient.data.size #type?
         t = self.timeInterval.toPlainText() #type str
-        x = np.arange(0, 100, int(t), np.dtype(np.int32)) #makes x-axis in terms of entered time intervals.(int i/p)
-        # have to turn all items into int first (is int ok? if not, linspace is better than arange)
+        x = np.arange(0, 100, float(t), np.dtype(np.float)) #makes x-axis in terms of entered time intervals.(float i/p(?))
+        # have to turn all items into same type first (is int ok? if not, linspace is better than arange)
         xvalues = ([])
         includedx = self.patient.data.size
         for j in np.arange(0, includedx+1, 1):
