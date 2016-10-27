@@ -99,7 +99,7 @@ class COcalcDialog(QDialog, ui_COcalc.Ui_CO_Calculator):
 
         line1 = self.plotwidget.axes.plot(xvalues, self.patient.data)
         self.plotwidget.axes.legend((line1), ['Patient data'])
-        line2 = self.plotwidget.axes.addplot(self.patient.contTimes, self.patient.contData, self.patient.times, self.patient.data)
+        line2 = self.plotwidget.axes.plot(self.patient.contTimes, self.patient.contData, self.patient.times, self.patient.data)
         self.plotwidget.axes.legend((line2), ['Curve Fit'])
 
         self.plotwidget.axes.set_title([''])
