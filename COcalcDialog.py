@@ -36,7 +36,7 @@ class COcalcDialog(QDialog, ui_COcalc.Ui_CO_Calculator):
         self.buttonBox.button(QtGui.QDialogButtonBox.Apply).clicked.connect(self.Apply)
         self.buttonBox.button(QtGui.QDialogButtonBox.Reset).clicked.connect(self.Reset)
         self.patient = PatientData.Patient() # this is the object that holds the data and does the calculations
-
+        self.utilities = COUtilities
         """
         self.HUvalues = myTableWidget(CO_Calculator)
         self.HUvalues.setGeometry(QtCore.QRect(40, 20, 141, 571))
@@ -50,7 +50,6 @@ class COcalcDialog(QDialog, ui_COcalc.Ui_CO_Calculator):
         self.HUvalues.verticalHeader().setCascadingSectionResizes(False)
         self.HUvalues.verticalHeader().setSortIndicatorShown(False)
         """
-        self.Reset
 
     def Apply(self, parent=None):
         a = []
@@ -59,7 +58,7 @@ class COcalcDialog(QDialog, ui_COcalc.Ui_CO_Calculator):
             temp = self.HUvalues.item(i,0)
             if temp:
                 a.append(float(temp.text()))
-        a = np.array(a) #type int32
+        a = np.array(a) #type float
 
         b = float(self.baselineInput.toPlainText())
 
@@ -67,12 +66,12 @@ class COcalcDialog(QDialog, ui_COcalc.Ui_CO_Calculator):
         self.patient.data = a - b
 
         self.patient.getCoeffs()
-        self.COUtilites.getR2()
+        self.patient.getR2()
         self.patient.tpeak = self.patient.alpha * self.patient.beta
-        self.utilities.getContData()
+        self.patient.getContData()
         self.patient.calcCO()
 
-        self.alpha.setPlainText(str(self.patient.alpha)) #unresolved attribute instance for Patient class for alpha, removed 'patient'
+        self.alpha.setPlainText(str(self.patient.alpha))
         self.beta.setPlainText(str(self.patient.beta))
         #self.t0.setPlainText(str(self.patient.)
         self.cardiacOutput.setPlainText(str(self.patient.CO))
@@ -100,7 +99,7 @@ class COcalcDialog(QDialog, ui_COcalc.Ui_CO_Calculator):
 
         line1 = self.plotwidget.axes.plot(xvalues, self.patient.data)
         self.plotwidget.axes.legend((line1), ['Patient data'])
-        line2 = self.plotwidget.axes.plot(self.patient.contTimes, self.patient.contData, self.patient.times, self.patient.data)
+        line2 = self.plotwidget.axes.addplot(self.patient.contTimes, self.patient.contData, self.patient.times, self.patient.data)
         self.plotwidget.axes.legend((line2), ['Curve Fit'])
 
         self.plotwidget.axes.set_title([''])
