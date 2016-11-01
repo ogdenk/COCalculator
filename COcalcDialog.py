@@ -70,15 +70,15 @@ class COcalcDialog(QDialog, ui_COcalc.Ui_CO_Calculator):
         self.patient.tpeak = self.patient.alpha * self.patient.beta
         self.patient.getContData()
         self.patient.calcCO()
+        self.patient.getStats()
 
-        self.alpha.setPlainText(str(self.patient.alpha))
-        self.beta.setPlainText(str(self.patient.beta))
+        self.alpha.setPlainText(str(round(self.patient.alpha, 3)))
+        self.beta.setPlainText(str(round(self.patient.beta, 3)))
         #self.t0.setPlainText(str(self.patient.)
-        self.cardiacOutput.setPlainText(str(self.patient.CO))
-        self.AUC.setPlainText(str(self.patient.AUC))
-        self.rsquared.setPlainText(str(self.patient.R2))
-        self.peakTime.setPlainText(str(self.patient.tpeak))
-        #print(self.patient.CO)
+        self.cardiacOutput.setPlainText(str(round(self.patient.CO, 3)))
+        self.AUC.setPlainText(str(round(self.patient.AUC, 3)))
+        self.rsquared.setPlainText(str(round(self.patient.R2, 3)))
+        self.peakTime.setPlainText(str(round(self.patient.tpeak,3)))
 
         self.plotwidget.axes.clear()
         self.plotwidget.axes.autoscale(enable = True, axis = 'both', tight = None)
@@ -97,16 +97,15 @@ class COcalcDialog(QDialog, ui_COcalc.Ui_CO_Calculator):
         xvalues = np.array(xvalues)
         #print(xvalues)
 
-        line1 = self.plotwidget.axes.plot(xvalues, self.patient.data)
-        self.plotwidget.axes.legend((line1), ['Patient data'])
-        line2 = self.plotwidget.axes.plot(self.patient.contTimes, self.patient.contData, self.patient.times, self.patient.data)
-        self.plotwidget.axes.legend((line2), ['Curve Fit'])
+        self.plotwidget.axes.hold(True)
+        self.plotwidget.axes.plot(xvalues, self.patient.data, label = 'Patient Data')
+        self.plotwidget.axes.plot(self.patient.contTimes, self.patient.contData, label = 'Curve Fit')
+        self.plotwidget.axes.legend()
 
-        self.plotwidget.axes.set_title([''])
-        self.plotwidget.axes.set_xlabel(['Time (s)'])
-        self.plotwidget.axes.set_ylabel(['Concentration (Cmg)/I'])
+        self.plotwidget.axes.set_title(' ')
+        self.plotwidget.axes.set_xlabel('Time (s)')
+        self.plotwidget.axes.set_ylabel('Concentration (Cmg/I)')
         self.plotwidget.axes.set_xticklabels(t) #range(0,xvalues)
-        #self.plotwidget.axes.set_yticklabels()
         self.plotwidget.draw()
 
     def Reset(self, parent=None):

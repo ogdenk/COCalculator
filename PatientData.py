@@ -39,6 +39,7 @@ class Patient:
         Imass = 0.3 * 350 * 75
         self.CO = Imass / self.AUC * 24 * 60 / 1000
 
+
     def getCoeffs(self):  # uses the curvefit function to get coeffs.  Takes in the time shift as parameter
         self.times = np.arange(self.shift, self.shift + len(self.data) * 2, 2) #shouldn't timeInterval replace '2'?
         popt, pcov = curve_fit(self.gammaFunc, self.times, self.data) #maxfev=50000
