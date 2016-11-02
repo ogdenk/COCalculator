@@ -62,7 +62,7 @@ class COcalcDialog(QDialog, ui_COcalc.Ui_CO_Calculator):
 
         b = float(self.baselineInput.toPlainText())
 
-        self.patient.offset = b
+        self.patient.baseline = b
         self.patient.data = a - b
 
         self.patient.getCoeffs()
@@ -87,11 +87,11 @@ class COcalcDialog(QDialog, ui_COcalc.Ui_CO_Calculator):
         #have to turn all items into same type first (is int ok? if not, linspace is better than arange)
         xvalues = ([])
         includedx = self.patient.data.size
-        for j in np.arange(0, includedx+1, 1):
+        for j in np.arange(0, includedx, 1):
             temp2 = x.item(j)
-            if(temp2):
-                xvalues.append(temp2)
+            xvalues.append(temp2)
         xvalues = np.array(xvalues)
+        xvalues = xvalues + self.patient.shift
 
         self.plotwidget.axes.hold(True)
         self.plotwidget.axes.plot(xvalues, self.patient.data, '.', label = 'Patient Data')
@@ -100,7 +100,7 @@ class COcalcDialog(QDialog, ui_COcalc.Ui_CO_Calculator):
 
         self.plotwidget.axes.set_title(' ')
         self.plotwidget.axes.set_xlabel('Time (s)')
-        self.plotwidget.axes.set_ylabel('Concentration (Cmg/I)')
+        self.plotwidget.axes.set_ylabel('Enhancement (HU)')
         #self.plotwidget.axes.set_xticklabels(t) #range(0,xvalues)
         self.plotwidget.draw()
 
@@ -119,7 +119,7 @@ class COcalcDialog(QDialog, ui_COcalc.Ui_CO_Calculator):
 
         self.patient.number = 0
         self.patient.data = 0
-        self.patient.offset = 0
+        self.patient.baseline = 0
         self.patient.shift = 0
         self.patient.A = 0
         self.patient.alpha = 0
