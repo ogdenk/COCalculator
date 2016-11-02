@@ -22,7 +22,7 @@ class Patient:
         self.TTP = 0
         self.MTT = 0
 
-    def gammaFunc(self, tau, A, alpha, beta):  # evaluates the gamma variate function. #same alpha, beta, A as patient class?
+    def gammaFunc(self, tau, A, alpha, beta):  # evaluates the gamma variate function.
         return A * tau ** alpha * np.exp(-tau / beta)
 
     def GVCurveFit(self, shift, times, data):  # uses the curvefit function to get coeffs.

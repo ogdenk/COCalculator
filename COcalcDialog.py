@@ -35,7 +35,7 @@ class COcalcDialog(QDialog, ui_COcalc.Ui_CO_Calculator):
         self.HUtoIodineConversion.setPlainText("24")
         self.buttonBox.button(QtGui.QDialogButtonBox.Apply).clicked.connect(self.Apply)
         self.buttonBox.button(QtGui.QDialogButtonBox.Reset).clicked.connect(self.Reset)
-        self.patient = PatientData.Patient() # this is the object that holds the data and does the calculations
+        self.patient = PatientData.Patient() #object that holds the data and does the calculations
         self.utilities = COUtilities
         """
         self.HUvalues = myTableWidget(CO_Calculator)
@@ -95,7 +95,6 @@ class COcalcDialog(QDialog, ui_COcalc.Ui_CO_Calculator):
             if(temp2):
                 xvalues.append(temp2)
         xvalues = np.array(xvalues)
-        #print(xvalues)
 
         self.plotwidget.axes.hold(True)
         self.plotwidget.axes.plot(xvalues, self.patient.data, label = 'Patient Data')
@@ -136,7 +135,6 @@ class COcalcDialog(QDialog, ui_COcalc.Ui_CO_Calculator):
         self.patient.AUC = 0
         self.patient.CO = 0
 
-        #self.plotwidget.plt.delaxes()
         clearx = []
         cleary = []
         clearline = self.plotwidget.axes.plot(clearx, cleary)
