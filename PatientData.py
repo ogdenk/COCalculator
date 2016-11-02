@@ -1,5 +1,4 @@
 import numpy as np
-#from COUtilities import gammaFunc, getContData, getStats, GVCurveFit
 from scipy.optimize import curve_fit
 
 class Patient:
@@ -61,9 +60,3 @@ class Patient:
         #if (self.data.len() = 0):
         #    exit () #or return()?
         #else:
-
-    def calcCO(self):  #Do the actual CO calculation after the curve fitting is done
-        temp=0
-
-
-

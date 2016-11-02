@@ -4,7 +4,7 @@ from PyQt4 import QtCore, QtGui
 import ui_COcalc
 import ctypes
 import PatientData
-import COUtilities
+
 
 from matplotlib import pyplot as plt
 from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as Canvas
@@ -36,7 +36,7 @@ class COcalcDialog(QDialog, ui_COcalc.Ui_CO_Calculator):
         self.buttonBox.button(QtGui.QDialogButtonBox.Apply).clicked.connect(self.Apply)
         self.buttonBox.button(QtGui.QDialogButtonBox.Reset).clicked.connect(self.Reset)
         self.patient = PatientData.Patient() #object that holds the data and does the calculations
-        self.utilities = COUtilities
+
         """
         self.HUvalues = myTableWidget(CO_Calculator)
         self.HUvalues.setGeometry(QtCore.QRect(40, 20, 141, 571))
@@ -69,7 +69,6 @@ class COcalcDialog(QDialog, ui_COcalc.Ui_CO_Calculator):
         self.patient.getR2()
         self.patient.tpeak = self.patient.alpha * self.patient.beta
         self.patient.getContData()
-        self.patient.calcCO()
         self.patient.getStats()
 
         self.alpha.setPlainText(str(round(self.patient.alpha, 3)))
