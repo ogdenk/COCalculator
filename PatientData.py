@@ -5,8 +5,8 @@ class Patient:
     def __init__(self):  # makes a Patient object.  Other variables are 0 here but they get filled in in other methods.
         #self.number = 0
         self.data = np.array([],dtype = float)
-        self.offset = 0 #is this t0? is t0 same as time offset calculated from findoffset?
-        self.shift = 0# what is 'shift'? user input (i.e. time interval)?
+        self.offset = 0 #is this t0?
+        self.shift = 0 #time shift to shift patient data to fit GV function best
         #self.timeInterval = 0
         self.A = 0
         self.alpha = 0
@@ -38,8 +38,7 @@ class Patient:
         Imass = 0.3 * 350 * 75
         self.CO = Imass / self.AUC * 24 * 60 / 1000
 
-
-    def getCoeffs(self):  # uses the curvefit function to get coeffs.  Takes in the time shift as parameter
+    def getCoeffs(self):  # uses the curvefit function to get coeffs.  Takes in the time shift as parameter (0 for now)
         self.times = np.arange(self.shift, self.shift + len(self.data) * 2, 2) #shouldn't timeInterval replace '2'?
         popt, pcov = curve_fit(self.gammaFunc, self.times, self.data) #maxfev=50000
         #popt- optimal values for parameters (array), pcov- estimated covariance of popt (2D array)

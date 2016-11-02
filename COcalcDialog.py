@@ -82,11 +82,9 @@ class COcalcDialog(QDialog, ui_COcalc.Ui_CO_Calculator):
         self.plotwidget.axes.clear()
         self.plotwidget.axes.autoscale(enable = True, axis = 'both', tight = None)
 
-        #print(self.patient.data.dtype) #type?
-        #s = self.patient.data.size #type?
         t = self.timeInterval.toPlainText() #type str
-        x = np.arange(0, 100, float(t), np.dtype(np.float)) #makes x-axis in terms of entered time intervals.(float i/p(?))
-        # have to turn all items into same type first (is int ok? if not, linspace is better than arange)
+        x = np.arange(0, 100, float(t), np.dtype(np.float)) #makes x-axis in terms of entered time intervals.(float i/p)
+        #have to turn all items into same type first (is int ok? if not, linspace is better than arange)
         xvalues = ([])
         includedx = self.patient.data.size
         for j in np.arange(0, includedx+1, 1):
@@ -96,14 +94,14 @@ class COcalcDialog(QDialog, ui_COcalc.Ui_CO_Calculator):
         xvalues = np.array(xvalues)
 
         self.plotwidget.axes.hold(True)
-        self.plotwidget.axes.plot(xvalues, self.patient.data, label = 'Patient Data')
-        self.plotwidget.axes.plot(self.patient.contTimes, self.patient.contData, label = 'Curve Fit')
+        self.plotwidget.axes.plot(xvalues, self.patient.data, '.', label = 'Patient Data')
+        self.plotwidget.axes.plot(self.patient.contTimes, self.patient.contData, '-', label = 'Curve Fit')
         self.plotwidget.axes.legend()
 
         self.plotwidget.axes.set_title(' ')
         self.plotwidget.axes.set_xlabel('Time (s)')
         self.plotwidget.axes.set_ylabel('Concentration (Cmg/I)')
-        self.plotwidget.axes.set_xticklabels(t) #range(0,xvalues)
+        #self.plotwidget.axes.set_xticklabels(t) #range(0,xvalues)
         self.plotwidget.draw()
 
     def Reset(self, parent=None):
@@ -134,13 +132,16 @@ class COcalcDialog(QDialog, ui_COcalc.Ui_CO_Calculator):
         self.patient.AUC = 0
         self.patient.CO = 0
 
+        self.plotwidget.axes.hold(False)
         clearx = []
         cleary = []
-        clearline = self.plotwidget.axes.plot(clearx, cleary)
+        self.plotwidget.axes.plot(clearx, cleary)
         self.plotwidget.axes.set_title('')
         self.plotwidget.axes.set_xlabel('')
         self.plotwidget.axes.set_ylabel('')
         self.plotwidget.draw()
+
+        #self.plotwidget.axes.clf()
 
 
 
