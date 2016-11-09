@@ -79,20 +79,49 @@ class COcalcDialog(QDialog, ui_COcalc.Ui_CO_Calculator):
         self.rsquared.setPlainText(str(round(self.patient.R2, 3)))
         self.peakTime.setPlainText(str(round(self.patient.tpeak,3)))
 
-        self.plotwidget.axes.clear()
-        self.plotwidget.axes.autoscale(enable = True, axis = 'both', tight = None)
-
         t = self.timeInterval.toPlainText() #type str
         x = np.arange(0, 100, float(t), np.dtype(np.float)) #makes x-axis in terms of entered time intervals.(float i/p)
-        #have to turn all items into same type first (is int ok? if not, linspace is better than arange)
         xvalues = ([])
         includedx = self.patient.data.size
         for j in np.arange(0, includedx, 1):
             temp2 = x.item(j)
             xvalues.append(temp2)
         xvalues = np.array(xvalues)
-        xvalues = xvalues + self.patient.shift
+        xvalues = xvalues #+ self.patient.shift
 
+        # estimate standard error of CO calculation with monte carlo simulation
+        #first calculate residuals & st. dev.
+        resids = np.array([], dtype = float)
+        GVvalueDataSet = np.array([], dtype = float)
+        for k in np.arange(0, self.patient.data.size, 1):
+            temp3 = self.patient.data.size.item(k)
+            GVvalue = self.patient.gammaFunc(self, xvalues[k], self.patient.A, self.patient.alpha, self.patient.beta)
+            GVvalueDataSet.append(GVvalue)
+            residValue = self.patient.data[k] - GVvalue
+            resids.append(residValue)
+        resids = np.array(resids)
+        GVvalueDataSet = np.array(GVvalue)
+
+        residSD = resids.std
+
+        #monte carlo
+        mcLoops = 100
+        fakeDataSet = np.array([], dtype=float)
+        fakeCOs = np.array([], dtype=float)
+
+        for m in np.arange(0, mcLoops, 1):
+            for l in np.arange(0, self.patient.data.size, 1):
+                temp4 = self.patient.data.size.item(l)
+                fakeDataPt = np.random.normal(loc = 0.0, scale = residSD) + GVvalueDataSet[l]
+                fakeDataSet.append(fakeDataPt)
+            fakeDataSet = np.array(fakeDataPt)
+            fakeDataCO = self.patient.getStats.CO(fakeDataSet[m])
+            fakeCOs.append(fakeDataCO)
+
+        fakeDataSD = fakeCOs.std
+
+        self.plotwidget.axes.clear()
+        self.plotwidget.axes.autoscale(enable=True, axis='both', tight=None)
         self.plotwidget.axes.hold(True)
         self.plotwidget.axes.plot(xvalues, self.patient.data, '.', label = 'Patient Data')
         self.plotwidget.axes.plot(self.patient.contTimes, self.patient.contData, '-', label = 'Curve Fit')

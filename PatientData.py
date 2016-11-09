@@ -20,6 +20,7 @@ class Patient:
         self.CO = 0
         self.TTP = 0
         self.MTT = 0
+        #self.resids = np.array([], dtype = float)
 
     def gammaFunc(self, tau, A, alpha, beta):  # evaluates the gamma variate function.
         return A * tau ** alpha * np.exp(-tau / beta)
@@ -36,7 +37,7 @@ class Patient:
     def getStats(self):  # uses the continous data for AUC and CO, prints out stats
         self.AUC = np.trapz([self.contData], x = [self.contTimes])
         Imass = 0.3 * 350 * 75
-        self.CO = Imass / self.AUC * 24 * 60 / 1000
+        self.CO = Imass / self.AUC / 24 * 60 / 1000
 
     def getCoeffs(self):  # uses the curvefit function to get coeffs.  Takes in the time shift as parameter (0 for now)
         self.findOffset()
@@ -61,5 +62,5 @@ class Patient:
         #    exit () #or return()?
         #else:
 
-    #def getStdError(self):
+
 
