@@ -35,7 +35,7 @@ class Patient:
         self.contData = self.A * (self.contTimes ** self.alpha) * np.exp(-self.contTimes / self.beta)
 
     def getStats(self):  # uses the continous data for AUC and CO, prints out stats
-        self.AUC = np.trapz([self.contData], x = [self.contTimes])
+        self.AUC = np.trapz(self.contData, self.contTimes)
         Imass = 0.3 * 350 * 75
         self.CO = Imass / self.AUC / 24 * 60 / 1000
 

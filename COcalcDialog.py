@@ -4,6 +4,7 @@ from PyQt4 import QtCore, QtGui
 import ui_COcalc
 import ctypes
 import PatientData
+from scipy.optimize import curve_fit
 
 
 from matplotlib import pyplot as plt
@@ -91,35 +92,43 @@ class COcalcDialog(QDialog, ui_COcalc.Ui_CO_Calculator):
 
         # estimate standard error of CO calculation with monte carlo simulation
         #first calculate residuals & st. dev.
-        resids = np.array([], dtype = float)
-        GVvalueDataSet = np.array([], dtype = float)
+        resids =  np.empty(self.patient.data.size, dtype = float)
+        GVvalueDataSet = np.empty(self.patient.data.size, dtype = float)
         for k in np.arange(0, self.patient.data.size, 1):
-            temp3 = self.patient.data.size.item(k)
-            GVvalue = self.patient.gammaFunc(self, xvalues[k], self.patient.A, self.patient.alpha, self.patient.beta)
-            GVvalueDataSet.append(GVvalue)
+            #temp3 = self.patient.data.size.item(k)
+            GVvalue = self.patient.gammaFunc(xvalues[k], self.patient.A, self.patient.alpha, self.patient.beta)
+            GVvalueDataSet[k]=GVvalue
+            #GVvalueDataSet.append(GVvalue)
             residValue = self.patient.data[k] - GVvalue
-            resids.append(residValue)
-        resids = np.array(resids)
-        GVvalueDataSet = np.array(GVvalue)
+            resids[k] = residValue
+        #resids = np.array(resids)
+        #GVvalueDataSet = np.array(GVvalue)
 
-        residSD = resids.std
+        residSD = np.asscalar(np.std(resids, dtype = float))
+
 
         #monte carlo
         mcLoops = 100
-        fakeDataSet = np.array([], dtype=float)
-        fakeCOs = np.array([], dtype=float)
+        fakeDataSet =  np.empty(self.patient.data.size, dtype = float)
+        fakeCOs =  np.empty(mcLoops, dtype = float)
+        self.times = np.arange(self.patient.shift, self.patient.shift + len(self.patient.data)*2, 2)
 
         for m in np.arange(0, mcLoops, 1):
             for l in np.arange(0, self.patient.data.size, 1):
-                temp4 = self.patient.data.size.item(l)
-                fakeDataPt = np.random.normal(loc = 0.0, scale = residSD) + GVvalueDataSet[l]
-                fakeDataSet.append(fakeDataPt)
-            fakeDataSet = np.array(fakeDataPt)
-            fakeDataCO = self.patient.getStats.CO(fakeDataSet[m])
-            fakeCOs.append(fakeDataCO)
+                #temp4 = self.patient.data.size.item(l)
+                fakeDataPt = np.random.normal(0.0, residSD) + GVvalueDataSet[l]
+                fakeDataSet[l] = fakeDataPt
+            popt, pcov = curve_fit(self.patient.gammaFunc, self.times, fakeDataSet,maxfev=2000)
+            mcA, mcAlpha, mcBeta = popt[0], popt[1], popt[2]
+            mcContData = mcA * (self.patient.contTimes ** mcAlpha) * np.exp(-self.patient.contTimes / mcBeta)
+            mcAUC = np.trapz([mcContData], x=[self.patient.contTimes])
+            Imass = 0.3 * 350 * 75
+            fakeCOs[m] = Imass / mcAUC / 24 * 60 / 1000
 
-        fakeDataSD = fakeCOs.std
+        fakeDataSD = np.std(fakeCOs)
+        self.standardError.setPlainText(str(round(self.fakeDataSD, 3)))
 
+        #plot patient data and curve fit
         self.plotwidget.axes.clear()
         self.plotwidget.axes.autoscale(enable=True, axis='both', tight=None)
         self.plotwidget.axes.hold(True)
