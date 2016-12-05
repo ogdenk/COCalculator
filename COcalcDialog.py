@@ -6,7 +6,6 @@ import ctypes
 import PatientData
 from scipy.optimize import curve_fit
 
-
 from matplotlib import pyplot as plt
 from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as Canvas
 from matplotlib.figure import Figure
@@ -68,7 +67,6 @@ class COcalcDialog(QDialog, ui_COcalc.Ui_CO_Calculator):
 
         self.patient.getCoeffs()
         self.patient.getR2()
-        self.patient.tpeak = self.patient.alpha * self.patient.beta
         self.patient.getContData()
         self.patient.getStats()
 
@@ -78,7 +76,8 @@ class COcalcDialog(QDialog, ui_COcalc.Ui_CO_Calculator):
         self.cardiacOutput.setPlainText(str(round(self.patient.CO, 3)))
         self.AUC.setPlainText(str(round(self.patient.AUC, 3)))
         self.rsquared.setPlainText(str(round(self.patient.R2, 3)))
-        self.peakTime.setPlainText(str(round(self.patient.tpeak,3)))
+        self.peakTime.setPlainText(str(round(self.patient.TTP,3)))
+        self.MTT.setPlainText(str(round(self.patient.MTT, 3)))
 
         t = self.timeInterval.toPlainText() #type str
         x = np.arange(0, 100, float(t), np.dtype(np.float)) #makes x-axis in terms of entered time intervals.(float i/p)
@@ -123,10 +122,10 @@ class COcalcDialog(QDialog, ui_COcalc.Ui_CO_Calculator):
             mcContData = mcA * (self.patient.contTimes ** mcAlpha) * np.exp(-self.patient.contTimes / mcBeta)
             mcAUC = np.trapz([mcContData], x=[self.patient.contTimes])
             Imass = 0.3 * 350 * 75
-            fakeCOs[m] = Imass / mcAUC / 24 * 60 / 1000
+            fakeCOs[m] = Imass / mcAUC * 24 * 60 / 1000
 
         fakeDataSD = np.std(fakeCOs)
-        self.standardError.setPlainText(str(round(self.fakeDataSD, 3)))
+        self.standardError.setPlainText(str(round(fakeDataSD, 3)))
 
         #plot patient data and curve fit
         self.plotwidget.axes.clear()

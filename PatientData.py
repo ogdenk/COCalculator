@@ -37,7 +37,9 @@ class Patient:
     def getStats(self):  # uses the continous data for AUC and CO, prints out stats
         self.AUC = np.trapz(self.contData, self.contTimes)
         Imass = 0.3 * 350 * 75
-        self.CO = Imass / self.AUC / 24 * 60 / 1000
+        self.CO = Imass / self.AUC * 24 * 60 / 1000
+        self.TTP = self.alpha*self.beta
+        self.MTT = self.AUC/24/(self.TTP)
 
     def getCoeffs(self):  # uses the curvefit function to get coeffs.  Takes in the time shift as parameter (0 for now)
         self.findOffset()
@@ -55,7 +57,7 @@ class Patient:
         self.R2 = 1 - (SSres / SStot)
 
     def findOffset(self): #Find the best offset time for the given data
-        self.shift = 4.0
+        self.shift = 0.0
         # NEED to do some checking on the data to make sure that there are values available
         # someting like IF(self.data.len() =0) then exit
         #if (self.data.len() = 0):
