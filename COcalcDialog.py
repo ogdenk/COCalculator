@@ -74,20 +74,21 @@ class COcalcDialog(QDialog, ui_COcalc.Ui_CO_Calculator):
         self.beta.setPlainText(str(round(self.patient.beta, 3)))
         #self.t0.setPlainText(str(self.patient.)
         self.cardiacOutput.setPlainText(str(round(self.patient.CO, 3)))
-        self.AUC.setPlainText(str(round(self.patient.AUC, 3)))
+        self.AUC.setPlainText(str(round(self.patient.AUC, 0)))
         self.rsquared.setPlainText(str(round(self.patient.R2, 3)))
         self.peakTime.setPlainText(str(round(self.patient.TTP,3)))
         self.MTT.setPlainText(str(round(self.patient.MTT, 3)))
 
-        t = self.timeInterval.toPlainText() #type str
-        x = np.arange(0, 100, float(t), np.dtype(np.float)) #makes x-axis in terms of entered time intervals.(float i/p)
+        # create array of xvalues based on time interval i/p, for plotting later
+        t = self.timeInterval.toPlainText()  # type str
+        x = np.arange(0, 100, float(t), np.dtype(np.float))  # makes x-axis in terms of entered time intervals.(float i/p)
         xvalues = ([])
         includedx = self.patient.data.size
         for j in np.arange(0, includedx, 1):
             temp2 = x.item(j)
             xvalues.append(temp2)
         xvalues = np.array(xvalues)
-        xvalues = xvalues #+ self.patient.shift
+        xvalues = xvalues  # + self.patient.shift
 
         # estimate standard error of CO calculation with monte carlo simulation
         #first calculate residuals & st. dev.
@@ -104,7 +105,6 @@ class COcalcDialog(QDialog, ui_COcalc.Ui_CO_Calculator):
         #GVvalueDataSet = np.array(GVvalue)
 
         residSD = np.asscalar(np.std(resids, dtype = float))
-
 
         #monte carlo
         mcLoops = 100
@@ -177,9 +177,6 @@ class COcalcDialog(QDialog, ui_COcalc.Ui_CO_Calculator):
         self.plotwidget.axes.set_xlabel('')
         self.plotwidget.axes.set_ylabel('')
         self.plotwidget.draw()
-
-        #self.plotwidget.axes.clf()
-
 
 
 

@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'COcalc.ui'
 #
-# Created: Tue Nov 01 14:14:32 2016
+# Created: Tue Dec 06 15:54:54 2016
 #      by: PyQt4 UI code generator 4.11.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -81,7 +81,7 @@ class Ui_CO_Calculator(object):
         self.standardError.setMouseTracking(False)
         self.standardError.setObjectName(_fromUtf8("standardError"))
         self.label_sterror = QtGui.QLabel(CO_Calculator)
-        self.label_sterror.setGeometry(QtCore.QRect(690, 410, 41, 20))
+        self.label_sterror.setGeometry(QtCore.QRect(690, 410, 51, 20))
         self.label_sterror.setObjectName(_fromUtf8("label_sterror"))
         self.peakTime = QtGui.QPlainTextEdit(CO_Calculator)
         self.peakTime.setGeometry(QtCore.QRect(610, 440, 61, 24))
@@ -160,7 +160,7 @@ class Ui_CO_Calculator(object):
         self.label_CO.setText(_translate("CO_Calculator", "Cardiac Output (L/min)", None))
         self.label_bloodHU.setText(_translate("CO_Calculator", "Blood Hounsfield Units", None))
         self.label_tinterval.setText(_translate("CO_Calculator", "Time Interval (s)", None))
-        self.label_sterror.setText(_translate("CO_Calculator", "st. error", None))
+        self.label_sterror.setText(_translate("CO_Calculator", "Std. Error", None))
         self.label_peaktime.setText(_translate("CO_Calculator", "Time to Peak (s)", None))
         self.label_MTT.setText(_translate("CO_Calculator", "Mean Transit Time (s)", None))
         self.label_timedensitycurve.setText(_translate("CO_Calculator", "Time Density Curve", None))
