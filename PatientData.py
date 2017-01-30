@@ -46,8 +46,9 @@ class Patient:
         self.findOffset()
         self.times = np.arange(-self.shift, -self.shift + len(self.data) * 2, 2) #shouldn't timeInterval replace '2'?
         index = np.where(self.times >= 0)
-        self.shiftedTime = self.times[index[0]:]
-        self.shiftedData = self.data[index[0]:]
+        temp = index[0][0]
+        self.shiftedTime = self.times[temp:]
+        self.shiftedData = self.data[temp:]
         #self.shiftedTime = self.times - self.shift
         popt, pcov = curve_fit(self.gammaFunc, self.shiftedTime, self.shiftedData) #maxfev=50000
         #popt- optimal values for parameters (array), pcov- estimated covariance of popt (2D array)
