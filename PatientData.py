@@ -12,6 +12,8 @@ class Patient:
         self.alpha = 0
         self.beta = 0
         self.times = 0 #xdata for curve_fit function.
+        self.shiftedTime = 0
+        self.shiftedData = 0
         self.fitdata = 0
         self.R2 = 0
         self.contTimes = 0 #This holds 'continuous', i.e. higher res times for smooth curve plot
@@ -26,7 +28,6 @@ class Patient:
         return A * tau ** alpha * np.exp(-tau / beta)
 
     def GVCurveFit(self, shift, times, data):  # uses the curvefit function to get coeffs.
-        times = np.arange(self.shift, self.shift + len(data) * 2, 2)
         popt, pcov = curve_fit(self.gammaFunc, times, data, maxfev=50000)
         return popt
 
@@ -43,8 +44,12 @@ class Patient:
 
     def getCoeffs(self):  # uses the curvefit function to get coeffs.  Takes in the time shift as parameter (0 for now)
         self.findOffset()
-        self.times = np.arange(self.shift, self.shift + len(self.data) * 2, 2) #shouldn't timeInterval replace '2'?
-        popt, pcov = curve_fit(self.gammaFunc, self.times, self.data) #maxfev=50000
+        self.times = np.arange(-self.shift, -self.shift + len(self.data) * 2, 2) #shouldn't timeInterval replace '2'?
+        index = np.where(self.times >= 0)
+        self.shiftedTime = self.times[index[0]:]
+        self.shiftedData = self.data[index[0]:]
+        #self.shiftedTime = self.times - self.shift
+        popt, pcov = curve_fit(self.gammaFunc, self.shiftedTime, self.shiftedData) #maxfev=50000
         #popt- optimal values for parameters (array), pcov- estimated covariance of popt (2D array)
         self.A, self.alpha, self.beta = popt[0], popt[1], popt[2]  # popt is the coeff array.
 
@@ -57,7 +62,7 @@ class Patient:
         self.R2 = 1 - (SSres / SStot)
 
     def findOffset(self): #Find the best offset time for the given data
-        self.shift = 0.0
+        self.shift = 1
         # NEED to do some checking on the data to make sure that there are values available
         # someting like IF(self.data.len() =0) then exit
         #if (self.data.len() = 0):
