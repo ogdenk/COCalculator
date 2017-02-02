@@ -117,7 +117,7 @@ class COcalcMain(QMainWindow, ui_COcalcMain.Ui_MainWindow):
                 #temp4 = self.patient.data.size.item(l)
                 fakeDataPt = np.random.normal(0.0, residSD) + GVvalueDataSet[l]
                 fakeDataSet[l] = fakeDataPt
-            popt, pcov = curve_fit(self.patient.gammaFunc, self.times, fakeDataSet,maxfev=2000)
+            popt, pcov = curve_fit(self.patient.gammaFunc, self.times, fakeDataSet,maxfev=5000)
             mcA, mcAlpha, mcBeta = popt[0], popt[1], popt[2]
             mcContData = mcA * (self.patient.contTimes ** mcAlpha) * np.exp(-self.patient.contTimes / mcBeta)
             mcAUC = np.trapz([mcContData], x=[self.patient.contTimes])
