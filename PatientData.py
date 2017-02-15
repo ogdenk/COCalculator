@@ -52,7 +52,7 @@ class Patient:
         #self.shiftedTime = self.times[temp:]
         #self.shiftedData = self.data[temp:]
         #self.shiftedTime = self.times - self.shift
-        popt, pcov = curve_fit(self.gammaFunc, self.times, self.data, p0 = [2, 2, 2], method = {'lm'}) #maxfev=50000
+        popt, pcov = curve_fit(self.gammaFunc, self.times, self.data, p0 = [2, 2, 2]) #maxfev=50000
         #popt- optimal values for parameters (array), pcov- estimated covariance of popt (2D array)
         self.A, self.alpha, self.beta = popt[0], popt[1], popt[2]  # popt is the coeff array.
 
