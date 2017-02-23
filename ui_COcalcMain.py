@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'COcalc_mainwindow.ui'
 #
-# Created: Tue Dec 06 16:28:32 2016
+# Created: Thu Feb 23 16:05:11 2017
 #      by: PyQt4 UI code generator 4.11.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -58,38 +58,38 @@ class Ui_MainWindow(object):
         self.plotwidget.setGeometry(QtCore.QRect(170, 40, 601, 381))
         self.plotwidget.setObjectName(_fromUtf8("plotwidget"))
         self.CurveFitResults = QtGui.QGroupBox(self.centralwidget)
-        self.CurveFitResults.setGeometry(QtCore.QRect(180, 420, 271, 80))
+        self.CurveFitResults.setGeometry(QtCore.QRect(180, 420, 281, 80))
         self.CurveFitResults.setObjectName(_fromUtf8("CurveFitResults"))
         self.label_rsquared = QtGui.QLabel(self.CurveFitResults)
-        self.label_rsquared.setGeometry(QtCore.QRect(180, 20, 31, 16))
+        self.label_rsquared.setGeometry(QtCore.QRect(170, 20, 31, 16))
         self.label_rsquared.setObjectName(_fromUtf8("label_rsquared"))
         self.alpha = QtGui.QPlainTextEdit(self.CurveFitResults)
-        self.alpha.setGeometry(QtCore.QRect(20, 40, 40, 24))
+        self.alpha.setGeometry(QtCore.QRect(10, 40, 40, 24))
         self.alpha.setMouseTracking(False)
         self.alpha.setObjectName(_fromUtf8("alpha"))
         self.rsquared = QtGui.QPlainTextEdit(self.CurveFitResults)
-        self.rsquared.setGeometry(QtCore.QRect(170, 40, 40, 24))
+        self.rsquared.setGeometry(QtCore.QRect(159, 40, 41, 24))
         self.rsquared.setMouseTracking(False)
         self.rsquared.setObjectName(_fromUtf8("rsquared"))
         self.beta = QtGui.QPlainTextEdit(self.CurveFitResults)
-        self.beta.setGeometry(QtCore.QRect(70, 40, 40, 24))
+        self.beta.setGeometry(QtCore.QRect(60, 40, 40, 24))
         self.beta.setMouseTracking(False)
         self.beta.setObjectName(_fromUtf8("beta"))
         self.AUC = QtGui.QPlainTextEdit(self.CurveFitResults)
-        self.AUC.setGeometry(QtCore.QRect(220, 40, 40, 24))
+        self.AUC.setGeometry(QtCore.QRect(209, 40, 61, 24))
         self.AUC.setMouseTracking(False)
         self.AUC.setObjectName(_fromUtf8("AUC"))
         self.label_beta = QtGui.QLabel(self.CurveFitResults)
-        self.label_beta.setGeometry(QtCore.QRect(80, 20, 31, 16))
+        self.label_beta.setGeometry(QtCore.QRect(70, 20, 31, 16))
         self.label_beta.setObjectName(_fromUtf8("label_beta"))
         self.label_alpha = QtGui.QLabel(self.CurveFitResults)
-        self.label_alpha.setGeometry(QtCore.QRect(30, 20, 31, 16))
+        self.label_alpha.setGeometry(QtCore.QRect(20, 20, 31, 16))
         self.label_alpha.setObjectName(_fromUtf8("label_alpha"))
         self.label_toffset = QtGui.QLabel(self.CurveFitResults)
-        self.label_toffset.setGeometry(QtCore.QRect(130, 20, 31, 16))
+        self.label_toffset.setGeometry(QtCore.QRect(120, 20, 31, 16))
         self.label_toffset.setObjectName(_fromUtf8("label_toffset"))
         self.t0 = QtGui.QPlainTextEdit(self.CurveFitResults)
-        self.t0.setGeometry(QtCore.QRect(120, 40, 40, 24))
+        self.t0.setGeometry(QtCore.QRect(110, 40, 40, 24))
         self.t0.setMouseTracking(False)
         self.t0.setObjectName(_fromUtf8("t0"))
         self.label_AUC = QtGui.QLabel(self.CurveFitResults)
@@ -149,6 +149,12 @@ class Ui_MainWindow(object):
         self.apply = QtGui.QPushButton(self.centralwidget)
         self.apply.setGeometry(QtCore.QRect(620, 600, 75, 23))
         self.apply.setObjectName(_fromUtf8("apply"))
+        self.PyQtGraph1 = PlotWidget(self.centralwidget)
+        self.PyQtGraph1.setGeometry(QtCore.QRect(190, 590, 221, 131))
+        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
+        brush.setStyle(QtCore.Qt.NoBrush)
+        self.PyQtGraph1.setBackgroundBrush(brush)
+        self.PyQtGraph1.setObjectName(_fromUtf8("PyQtGraph1"))
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtGui.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 799, 21))
@@ -182,3 +188,4 @@ class Ui_MainWindow(object):
         self.apply.setText(_translate("MainWindow", "Apply", None))
 
 from matplotlibwidget import MatplotlibWidget
+from pyqtgraph import PlotWidget

@@ -81,14 +81,14 @@ class COcalcMain(QMainWindow, ui_COcalcMain.Ui_MainWindow):
 
         # create array of xvalues based on time interval i/p, for plotting later
         t = self.timeInterval.toPlainText()  # type str
-        x = np.arange(0, 100, float(t), np.dtype(np.float))  # makes x-axis in terms of entered time intervals.(float i/p)
-        xvalues = ([])
-        includedx = self.patient.data.size
-        for j in np.arange(0, includedx, 1):
-            temp2 = x.item(j)
-            xvalues.append(temp2)
-        xvalues = np.array(xvalues)
-        xvalues = xvalues  # + self.patient.shift
+        #x = np.arange(0, 100, float(t), np.dtype(np.float))  # makes x-axis in terms of entered time intervals.(float i/p)
+        #xvalues = ([])
+        #includedx = self.patient.data.size
+        #for j in np.arange(0, includedx, 1):
+        #    temp2 = x.item(j)
+        #    xvalues.append(temp2)
+        #xvalues = np.array(xvalues)
+        #xvalues = xvalues  # + self.patient.shift
 
         # estimate standard error of CO calculation with monte carlo simulation
         #first calculate residuals & st. dev.
@@ -96,7 +96,7 @@ class COcalcMain(QMainWindow, ui_COcalcMain.Ui_MainWindow):
         GVvalueDataSet = np.empty(self.patient.data.size, dtype = float)
         for k in np.arange(0, self.patient.data.size, 1):
             #temp3 = self.patient.data.size.item(k)
-            GVvalue = self.patient.gammaFunc(xvalues[k], self.patient.A, self.patient.alpha, self.patient.beta)
+            GVvalue = self.patient.gammaFunc(self.patient.times[k], self.patient.A, self.patient.alpha, self.patient.beta)
             GVvalueDataSet[k]=GVvalue
             #GVvalueDataSet.append(GVvalue)
             residValue = self.patient.data[k] - GVvalue
@@ -131,7 +131,7 @@ class COcalcMain(QMainWindow, ui_COcalcMain.Ui_MainWindow):
         self.plotwidget.axes.clear()
         self.plotwidget.axes.autoscale(enable=True, axis='both', tight=None)
         self.plotwidget.axes.hold(True)
-        self.plotwidget.axes.plot(xvalues, self.patient.data, '.', label = 'Patient Data')
+        self.plotwidget.axes.plot(self.patient.times, self.patient.data, '.', label = 'Patient Data')
         self.plotwidget.axes.plot(self.patient.contTimes, self.patient.contData, '-', label = 'Curve Fit')
         self.plotwidget.axes.legend()
 
