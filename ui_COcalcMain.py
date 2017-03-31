@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'COcalc_mainwindow.ui'
+# Form implementation generated from reading ui file 'Cocalc_mainwindow.ui'
 #
-# Created: Thu Feb 23 16:05:11 2017
+# Created: Fri Mar 31 15:28:43 2017
 #      by: PyQt4 UI code generator 4.11.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -144,13 +144,13 @@ class Ui_MainWindow(object):
         self.timeInterval.setMouseTracking(False)
         self.timeInterval.setObjectName(_fromUtf8("timeInterval"))
         self.reset = QtGui.QPushButton(self.centralwidget)
-        self.reset.setGeometry(QtCore.QRect(490, 600, 75, 23))
+        self.reset.setGeometry(QtCore.QRect(190, 610, 75, 23))
         self.reset.setObjectName(_fromUtf8("reset"))
         self.apply = QtGui.QPushButton(self.centralwidget)
-        self.apply.setGeometry(QtCore.QRect(620, 600, 75, 23))
+        self.apply.setGeometry(QtCore.QRect(320, 610, 75, 23))
         self.apply.setObjectName(_fromUtf8("apply"))
         self.PyQtGraph1 = PlotWidget(self.centralwidget)
-        self.PyQtGraph1.setGeometry(QtCore.QRect(190, 590, 221, 131))
+        self.PyQtGraph1.setGeometry(QtCore.QRect(460, 520, 301, 201))
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.NoBrush)
         self.PyQtGraph1.setBackgroundBrush(brush)

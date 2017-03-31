@@ -64,7 +64,7 @@ class Patient:
         self.R2 = 1 - (SSres / SStot)
 
     def findOffset(self): #Find the best offset time for the given data
-        self.shift = 1
+        self.shift = 0
         # NEED to do some checking on the data to make sure that there are values available
         # someting like IF(self.data.len() =0) then exit
         #if (self.data.len() = 0):
