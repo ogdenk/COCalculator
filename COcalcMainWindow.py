@@ -61,9 +61,10 @@ class COcalcMain(QMainWindow, ui_COcalcMain.Ui_MainWindow):
             temp = self.HUvalues.item(i,0)
             if temp:
                 a.append(float(temp.text()))
-        a = np.array(a) #type float
-
-        b = float(self.baselineInput.toPlainText())
+       # a = np.array(a) #type float
+        a = np.array([45,82,130,150,174,180,163,161,127,82,81,78])
+        #b = float(self.baselineInput.toPlainText())
+        b = 41
 
         self.patient.baseline = b
         self.patient.data = a - b
@@ -130,7 +131,7 @@ class COcalcMain(QMainWindow, ui_COcalcMain.Ui_MainWindow):
         fakeDataSD = np.std(fakeCOs)
         self.standardError.setPlainText(str(round(fakeDataSD, 3)))
 
-        """
+
         #plot patient data and curve fit
         self.plotwidget.axes.clear()
         self.plotwidget.axes.autoscale(enable=True, axis='both', tight=None)
@@ -144,22 +145,16 @@ class COcalcMain(QMainWindow, ui_COcalcMain.Ui_MainWindow):
         self.plotwidget.axes.set_ylabel('Enhancement (HU)')
         #self.plotwidget.axes.set_xticklabels(t) #range(0,xvalues)
         self.plotwidget.draw()
-        """
+
 
         #plot with pyqtgraph
         self.PyQtGraph1.plot(title = ' ')
-        self.PyQtGraph1.plot(self.patient.times, self.patient.data, name = 'Patient Data')
+        self.PyQtGraph1.addLegend(size = (100,40), offset = (0,1))
+        self.PyQtGraph1.plot(self.patient.times, self.patient.data, name = 'Patient Data', pen = None, symbol = 't', symbolPen = None, symbolSize = 10,  symbolBrush=(100, 100, 255, 100))
         self.PyQtGraph1.plot(self.patient.contTimes, self.patient.contData, name = 'Curve Fit')
 
-        #self.PyQtGraph1.addLabel('Enhancement (HU)', angle = -90, rowspan = 1)
-        #self.PyQtGraph1.addLabel('Time (s)', col = 1, colspan = 1 )
-        #self.PyQtGraph1.addLegend()
-        #l = pg.LegendItem((100,60), offset=(70,30))  # args are (size, offset)
-        #l.setParentItem(self.PyQtGraph1.graphicsItem())
-
-        #still need clear plot function for reset button, darker background + line colors, troubleshoot addlabel, addLegend
-        #import pyqtgraph.examples
-        #pyqtgraph.examples.run()
+        self.PyQtGraph1.setLabel('left',"Enhancement (HU)")
+        self.PyQtGraph1.setLabel('bottom', "Time (s)")
 
     def Reset(self, parent=None):
         self.HUvalues.clear()
@@ -189,7 +184,7 @@ class COcalcMain(QMainWindow, ui_COcalcMain.Ui_MainWindow):
         self.patient.AUC = 0
         self.patient.CO = 0
 
-        """
+
         self.plotwidget.axes.hold(False)
         clearx = []
         cleary = []
@@ -198,7 +193,9 @@ class COcalcMain(QMainWindow, ui_COcalcMain.Ui_MainWindow):
         self.plotwidget.axes.set_xlabel('')
         self.plotwidget.axes.set_ylabel('')
         self.plotwidget.draw()
-        """
+
+        self.PyQtGraph1.clear()
+
 
 
 
