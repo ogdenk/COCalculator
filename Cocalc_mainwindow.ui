@@ -79,19 +79,6 @@
      <string>st. error</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_HUConversion">
-    <property name="geometry">
-     <rect>
-      <x>180</x>
-      <y>560</y>
-      <width>141</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>HU/Iodine (HU/(mg/mL)) </string>
-    </property>
-   </widget>
    <widget class="QLabel" name="label_bloodHU">
     <property name="geometry">
      <rect>
@@ -113,7 +100,7 @@
    <widget class="MatplotlibWidget" name="plotwidget">
     <property name="geometry">
      <rect>
-      <x>450</x>
+      <x>480</x>
       <y>520</y>
       <width>321</width>
       <height>191</height>
@@ -289,19 +276,6 @@
      <bool>false</bool>
     </property>
    </widget>
-   <widget class="QPlainTextEdit" name="HUtoIodineConversion">
-    <property name="geometry">
-     <rect>
-      <x>360</x>
-      <y>560</y>
-      <width>40</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="mouseTracking">
-     <bool>false</bool>
-    </property>
-   </widget>
    <widget class="QPlainTextEdit" name="baselineInput">
     <property name="geometry">
      <rect>
@@ -447,7 +421,7 @@
     <property name="geometry">
      <rect>
       <x>190</x>
-      <y>610</y>
+      <y>640</y>
       <width>75</width>
       <height>23</height>
      </rect>
@@ -460,7 +434,7 @@
     <property name="geometry">
      <rect>
       <x>320</x>
-      <y>610</y>
+      <y>640</y>
       <width>75</width>
       <height>23</height>
      </rect>
@@ -624,6 +598,123 @@ alternate-background-color: rgb(255, 255, 255);</string>
       </color>
      </brush>
     </property>
+   </widget>
+   <widget class="QPlainTextEdit" name="HUconversion_c">
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>690</y>
+      <width>40</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="mouseTracking">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_I">
+    <property name="geometry">
+     <rect>
+      <x>420</x>
+      <y>650</y>
+      <width>31</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>I +</string>
+    </property>
+   </widget>
+   <widget class="QGroupBox" name="IodinetoHUconversion">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>550</y>
+      <width>281</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Iodine (mg/mL) to HU conversion:</string>
+    </property>
+    <widget class="QLabel" name="label_rsquared_2">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>10</y>
+       <width>31</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>R^2</string>
+     </property>
+    </widget>
+    <widget class="QPlainTextEdit" name="rsquared_2">
+     <property name="geometry">
+      <rect>
+       <x>230</x>
+       <y>30</y>
+       <width>41</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="mouseTracking">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QPlainTextEdit" name="beta_2">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>20</y>
+       <width>40</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="mouseTracking">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_HU">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>30</y>
+       <width>31</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>HU = </string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_toffset_2">
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>10</y>
+       <width>31</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>t0 (s)</string>
+     </property>
+    </widget>
+    <widget class="QPlainTextEdit" name="t0_2">
+     <property name="geometry">
+      <rect>
+       <x>150</x>
+       <y>30</y>
+       <width>40</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="mouseTracking">
+      <bool>false</bool>
+     </property>
+    </widget>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
