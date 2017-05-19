@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'Cocalc_mainwindow.ui'
 #
-# Created: Wed Apr 19 16:42:36 2017
+# Created: Fri May 19 14:43:16 2017
 #      by: PyQt4 UI code generator 4.11.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -197,7 +197,7 @@ class Ui_MainWindow(object):
         brush.setStyle(QtCore.Qt.SolidPattern)
         self.PyQtGraph1.setBackgroundBrush(brush)
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
-        brush.setStyle(QtCore.Qt.SolidPattern)
+        brush.setStyle(QtCore.Qt.NoBrush)
         self.PyQtGraph1.setForegroundBrush(brush)
         self.PyQtGraph1.setObjectName(_fromUtf8("PyQtGraph1"))
         MainWindow.setCentralWidget(self.centralwidget)

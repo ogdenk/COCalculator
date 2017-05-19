@@ -616,7 +616,7 @@ alternate-background-color: rgb(255, 255, 255);</string>
      </brush>
     </property>
     <property name="foregroundBrush">
-     <brush brushstyle="SolidPattern">
+     <brush brushstyle="NoBrush">
       <color alpha="255">
        <red>0</red>
        <green>0</green>

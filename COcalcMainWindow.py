@@ -59,7 +59,7 @@ class COcalcMain(QMainWindow, ui_COcalcMain.Ui_MainWindow):
         allRows = self.HUvalues.rowCount()
         for i in np.arange(0, allRows+1, 1):
             temp = self.HUvalues.item(i,0)
-            if temp:
+            if temp is not None and temp.text():
                 a.append(float(temp.text()))
        # a = np.array(a) #type float
         a = np.array([45,82,130,150,174,180,163,161,127,82,81,78])
@@ -131,7 +131,6 @@ class COcalcMain(QMainWindow, ui_COcalcMain.Ui_MainWindow):
         fakeDataSD = np.std(fakeCOs)
         self.standardError.setPlainText(str(round(fakeDataSD, 3)))
 
-
         #plot patient data and curve fit
         self.plotwidget.axes.clear()
         self.plotwidget.axes.autoscale(enable=True, axis='both', tight=None)
@@ -146,8 +145,9 @@ class COcalcMain(QMainWindow, ui_COcalcMain.Ui_MainWindow):
         #self.plotwidget.axes.set_xticklabels(t) #range(0,xvalues)
         self.plotwidget.draw()
 
-
         #plot with pyqtgraph
+        #self.PyQtGraph1.setConfigOption('background', 'w')
+        #self.PyQtGraph1.setConfigOption('foreground', 'k')
         self.PyQtGraph1.plot(title = ' ')
         self.PyQtGraph1.addLegend(size = (100,40), offset = (0,1))
         self.PyQtGraph1.plot(self.patient.times, self.patient.data, name = 'Patient Data', pen = None, symbol = 't', symbolPen = None, symbolSize = 10,  symbolBrush=(100, 100, 255, 100))
