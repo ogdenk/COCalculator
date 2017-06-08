@@ -18,7 +18,7 @@
     <property name="geometry">
      <rect>
       <x>480</x>
-      <y>430</y>
+      <y>500</y>
       <width>121</width>
       <height>20</height>
      </rect>
@@ -31,7 +31,7 @@
     <property name="geometry">
      <rect>
       <x>600</x>
-      <y>460</y>
+      <y>530</y>
       <width>50</width>
       <height>24</height>
      </rect>
@@ -43,8 +43,8 @@
    <widget class="QLabel" name="label_tinterval">
     <property name="geometry">
      <rect>
-      <x>180</x>
-      <y>520</y>
+      <x>190</x>
+      <y>410</y>
       <width>91</width>
       <height>20</height>
      </rect>
@@ -56,8 +56,8 @@
    <widget class="QLabel" name="label_baseline">
     <property name="geometry">
      <rect>
-      <x>310</x>
-      <y>520</y>
+      <x>320</x>
+      <y>410</y>
       <width>46</width>
       <height>20</height>
      </rect>
@@ -70,7 +70,7 @@
     <property name="geometry">
      <rect>
       <x>660</x>
-      <y>430</y>
+      <y>500</y>
       <width>51</width>
       <height>20</height>
      </rect>
@@ -97,23 +97,13 @@
      <string>Blood Hounsfield Units</string>
     </property>
    </widget>
-   <widget class="MatplotlibWidget" name="plotwidget">
-    <property name="geometry">
-     <rect>
-      <x>480</x>
-      <y>520</y>
-      <width>321</width>
-      <height>191</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="QGroupBox" name="CurveFitResults">
     <property name="geometry">
      <rect>
-      <x>180</x>
-      <y>420</y>
+      <x>470</x>
+      <y>410</y>
       <width>281</width>
-      <height>80</height>
+      <height>71</height>
      </rect>
     </property>
     <property name="title">
@@ -254,7 +244,7 @@
     <property name="geometry">
      <rect>
       <x>600</x>
-      <y>490</y>
+      <y>560</y>
       <width>50</width>
       <height>24</height>
      </rect>
@@ -267,7 +257,7 @@
     <property name="geometry">
      <rect>
       <x>710</x>
-      <y>430</y>
+      <y>500</y>
       <width>40</width>
       <height>24</height>
      </rect>
@@ -279,8 +269,8 @@
    <widget class="QPlainTextEdit" name="baselineInput">
     <property name="geometry">
      <rect>
-      <x>360</x>
-      <y>520</y>
+      <x>370</x>
+      <y>410</y>
       <width>40</width>
       <height>24</height>
      </rect>
@@ -347,8 +337,8 @@
    <widget class="QLabel" name="label_peaktime">
     <property name="geometry">
      <rect>
-      <x>480</x>
-      <y>460</y>
+      <x>510</x>
+      <y>530</y>
       <width>81</width>
       <height>16</height>
      </rect>
@@ -361,7 +351,7 @@
     <property name="geometry">
      <rect>
       <x>350</x>
-      <y>20</y>
+      <y>0</y>
       <width>191</width>
       <height>20</height>
      </rect>
@@ -379,7 +369,7 @@
     <property name="geometry">
      <rect>
       <x>600</x>
-      <y>430</y>
+      <y>500</y>
       <width>50</width>
       <height>24</height>
      </rect>
@@ -394,8 +384,8 @@
    <widget class="QLabel" name="label_MTT">
     <property name="geometry">
      <rect>
-      <x>480</x>
-      <y>490</y>
+      <x>490</x>
+      <y>560</y>
       <width>111</width>
       <height>16</height>
      </rect>
@@ -407,8 +397,8 @@
    <widget class="QPlainTextEdit" name="timeInterval">
     <property name="geometry">
      <rect>
-      <x>260</x>
-      <y>520</y>
+      <x>270</x>
+      <y>410</y>
       <width>40</width>
       <height>24</height>
      </rect>
@@ -420,8 +410,8 @@
    <widget class="QPushButton" name="reset">
     <property name="geometry">
      <rect>
-      <x>190</x>
-      <y>640</y>
+      <x>540</x>
+      <y>680</y>
       <width>75</width>
       <height>23</height>
      </rect>
@@ -433,8 +423,8 @@
    <widget class="QPushButton" name="apply">
     <property name="geometry">
      <rect>
-      <x>320</x>
-      <y>640</y>
+      <x>670</x>
+      <y>680</y>
       <width>75</width>
       <height>23</height>
      </rect>
@@ -447,7 +437,7 @@
     <property name="geometry">
      <rect>
       <x>190</x>
-      <y>50</y>
+      <y>30</y>
       <width>551</width>
       <height>361</height>
      </rect>
@@ -599,62 +589,23 @@ alternate-background-color: rgb(255, 255, 255);</string>
      </brush>
     </property>
    </widget>
-   <widget class="QPlainTextEdit" name="HUconversion_c">
-    <property name="geometry">
-     <rect>
-      <x>400</x>
-      <y>690</y>
-      <width>40</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="mouseTracking">
-     <bool>false</bool>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_I">
-    <property name="geometry">
-     <rect>
-      <x>420</x>
-      <y>650</y>
-      <width>31</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>I +</string>
-    </property>
-   </widget>
    <widget class="QGroupBox" name="IodinetoHUconversion">
     <property name="geometry">
      <rect>
       <x>180</x>
-      <y>550</y>
+      <y>450</y>
       <width>281</width>
-      <height>61</height>
+      <height>51</height>
      </rect>
     </property>
     <property name="title">
-     <string>Iodine (mg/mL) to HU conversion:</string>
+     <string>Iodine (mg/mL) to HU conversion</string>
     </property>
-    <widget class="QLabel" name="label_rsquared_2">
+    <widget class="QPlainTextEdit" name="c">
      <property name="geometry">
       <rect>
-       <x>210</x>
-       <y>10</y>
-       <width>31</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>R^2</string>
-     </property>
-    </widget>
-    <widget class="QPlainTextEdit" name="rsquared_2">
-     <property name="geometry">
-      <rect>
-       <x>230</x>
-       <y>30</y>
+       <x>200</x>
+       <y>20</y>
        <width>41</width>
        <height>24</height>
       </rect>
@@ -663,12 +614,12 @@ alternate-background-color: rgb(255, 255, 255);</string>
       <bool>false</bool>
      </property>
     </widget>
-    <widget class="QPlainTextEdit" name="beta_2">
+    <widget class="QPlainTextEdit" name="a">
      <property name="geometry">
       <rect>
        <x>40</x>
        <y>20</y>
-       <width>40</width>
+       <width>41</width>
        <height>24</height>
       </rect>
      </property>
@@ -689,25 +640,25 @@ alternate-background-color: rgb(255, 255, 255);</string>
       <string>HU = </string>
      </property>
     </widget>
-    <widget class="QLabel" name="label_toffset_2">
+    <widget class="QLabel" name="label_I2plus">
      <property name="geometry">
       <rect>
-       <x>130</x>
-       <y>10</y>
-       <width>31</width>
+       <x>90</x>
+       <y>30</y>
+       <width>41</width>
        <height>16</height>
       </rect>
      </property>
      <property name="text">
-      <string>t0 (s)</string>
+      <string>I^2 +</string>
      </property>
     </widget>
-    <widget class="QPlainTextEdit" name="t0_2">
+    <widget class="QPlainTextEdit" name="b">
      <property name="geometry">
       <rect>
-       <x>150</x>
-       <y>30</y>
-       <width>40</width>
+       <x>130</x>
+       <y>20</y>
+       <width>41</width>
        <height>24</height>
       </rect>
      </property>
@@ -715,26 +666,168 @@ alternate-background-color: rgb(255, 255, 255);</string>
       <bool>false</bool>
      </property>
     </widget>
+    <widget class="QLabel" name="label_I">
+     <property name="geometry">
+      <rect>
+       <x>180</x>
+       <y>30</y>
+       <width>31</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>I +</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="InjectionParameters">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>510</y>
+      <width>281</width>
+      <height>111</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Injection Parameters</string>
+    </property>
+    <widget class="QPlainTextEdit" name="volume">
+     <property name="geometry">
+      <rect>
+       <x>150</x>
+       <y>80</y>
+       <width>41</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="mouseTracking">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QPlainTextEdit" name="dilution">
+     <property name="geometry">
+      <rect>
+       <x>150</x>
+       <y>20</y>
+       <width>41</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="mouseTracking">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_dilution">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>20</y>
+       <width>141</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Dilution (Omnipque fraction)</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_concentration">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>50</y>
+       <width>111</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Concentration (mg/mL)</string>
+     </property>
+    </widget>
+    <widget class="QPlainTextEdit" name="concentration">
+     <property name="geometry">
+      <rect>
+       <x>150</x>
+       <y>50</y>
+       <width>41</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="mouseTracking">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_volume">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>80</y>
+       <width>61</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Volume (cc)</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QComboBox" name="comboBox">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>630</y>
+      <width>141</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::WheelFocus</enum>
+    </property>
+    <property name="contextMenuPolicy">
+     <enum>Qt::ActionsContextMenu</enum>
+    </property>
+    <property name="acceptDrops">
+     <bool>false</bool>
+    </property>
+    <property name="editable">
+     <bool>false</bool>
+    </property>
+    <property name="currentIndex">
+     <number>0</number>
+    </property>
+    <property name="modelColumn">
+     <number>0</number>
+    </property>
+    <item>
+     <property name="text">
+      <string>Select Scanner...</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Toshiba @ 100 keV</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Toshiba @ 120 keV</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>GE VCT @ 120 keV</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>GE VCT @ 100 keV</string>
+     </property>
+    </item>
    </widget>
   </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>799</width>
-     <height>21</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QStatusBar" name="statusBar"/>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>MatplotlibWidget</class>
-   <extends>QWidget</extends>
-   <header>matplotlibwidget</header>
-  </customwidget>
   <customwidget>
    <class>PlotWidget</class>
    <extends>QGraphicsView</extends>
