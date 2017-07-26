@@ -28,7 +28,7 @@ class COcalcMain(QMainWindow, ui_COcalcMain.Ui_MainWindow):
     def __init__(self, parent=None):
         super(COcalcMain, self).__init__(parent)
         pqg.setConfigOption('background', 'w')
-        #pqg.mkColor(0,0,0,[255])
+        #pqg.mkColor(0,0,0,[255]) color changes here
         pqg.setConfigOption('foreground', 'k')
         self.setupUi(self)
         self.timeInterval.setPlainText("2") #want to allow user the option to change this value
