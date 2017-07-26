@@ -27,6 +27,9 @@ import sys
 class COcalcMain(QMainWindow, ui_COcalcMain.Ui_MainWindow):
     def __init__(self, parent=None):
         super(COcalcMain, self).__init__(parent)
+        pqg.setConfigOption('background', 'w')
+        #pqg.mkColor(0,0,0,[255])
+        pqg.setConfigOption('foreground', 'k')
         self.setupUi(self)
         self.timeInterval.setPlainText("2") #want to allow user the option to change this value
         self.HUtoIodineConversion.setPlainText("24")
@@ -114,6 +117,7 @@ class COcalcMain(QMainWindow, ui_COcalcMain.Ui_MainWindow):
         # plot with pyqtgraph
         #self.GraphicsView.setConfigOption('background', 'w')
         #self.GraphicsView.setConfigOption('foreground', 'k')
+
         self.GraphicsView.plot(title=' ')
         self.GraphicsView.addLegend(size=(100, 40), offset=(0, 1))
         self.GraphicsView.plot(self.patient.times, self.patient.data, name='Patient Data', pen=None, symbol='t',
