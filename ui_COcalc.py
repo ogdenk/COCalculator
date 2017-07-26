@@ -7,7 +7,9 @@
 #
 # WARNING! All changes made in this file will be lost!
 
-from PyQt4 import QtCore, QtGui
+from PyQt5 import QtCore, QtGui
+from pyqtgraph.pyqtgraph.widgets.MatplotlibWidget import MatplotlibWidget
+
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -172,4 +174,4 @@ class Ui_CO_Calculator(object):
         self.label_AUC.setText(_translate("CO_Calculator", "AUC", None))
         self.label_HUConversion.setText(_translate("CO_Calculator", "HU/Iodine (HU/(mg/mL)) ", None))
 
-from matplotlibwidget import MatplotlibWidget
+

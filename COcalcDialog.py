@@ -1,5 +1,5 @@
-from PyQt4.QtGui import *
-from PyQt4 import QtCore, QtGui
+from PyQt5.QtGui import *
+from PyQt5 import QtCore, QtGui
 #import QWidget
 import ui_COcalc
 import ctypes

@@ -1,14 +1,21 @@
-import COcalcDialog
-import COcalcMainWindow
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
-from PyQt4 import QtGui
+from PyQt5.QtCore import *
+from PyQt5 import QtGui
+from PyQt5.QtGui import *
+from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
+from PyQt5 import QtWidgets
+from PyQt5.QtWidgets import QApplication,QMainWindow
+import pyqtgraph as pqg
+from pyqtgraph import *
+
+from COcalcMainWindow import COcalcMain
+import ui_COcalcMain
 
 if __name__ == "__main__":
 
-    app = QtGui.QApplication(sys.argv)
-    #window = COcalcDialog.COcalcDialog()
-    window = COcalcMainWindow.COcalcMain()
+    app = QtWidgets.QApplication(sys.argv)
+    window = COcalcMain()
     window.show()
-    app.exec_()
+    sys.exit(app.exec_())
+
+

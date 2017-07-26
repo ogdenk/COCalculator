@@ -110,16 +110,6 @@
      <string>Blood Hounsfield Units</string>
     </property>
    </widget>
-   <widget class="MatplotlibWidget" name="plotwidget">
-    <property name="geometry">
-     <rect>
-      <x>170</x>
-      <y>40</y>
-      <width>601</width>
-      <height>381</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="QGroupBox" name="CurveFitResults">
     <property name="geometry">
      <rect>
@@ -386,7 +376,7 @@
    <widget class="QLabel" name="label_timedensitycurve">
     <property name="geometry">
      <rect>
-      <x>350</x>
+      <x>380</x>
       <y>20</y>
       <width>191</width>
       <height>20</height>
@@ -469,6 +459,16 @@
      <string>Apply</string>
     </property>
    </widget>
+   <widget class="PlotWidget" name="GraphicsView">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>60</y>
+      <width>571</width>
+      <height>351</height>
+     </rect>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -484,9 +484,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>MatplotlibWidget</class>
-   <extends>QWidget</extends>
-   <header>matplotlibwidget</header>
+   <class>PlotWidget</class>
+   <extends>QGraphicsView</extends>
+   <header>pyqtgraph</header>
   </customwidget>
  </customwidgets>
  <resources/>

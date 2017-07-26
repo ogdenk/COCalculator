@@ -1,19 +1,16 @@
-from PyQt4.QtGui import *
-from PyQt4 import QtCore, QtGui
+from PyQt5.QtGui import *
+from PyQt5 import QtCore, QtGui
 #import QWidget
+from PyQt5.QtWidgets import QMainWindow
+import pyqtgraph as pqg
+from pyqtgraph import *
 import ui_COcalcMain
-import ctypes
+
 import PatientData
 from scipy.optimize import curve_fit
 
-from matplotlib import pyplot as plt
-from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as Canvas
-from matplotlib.figure import Figure
-#from matplotlib import rcParams
-
 import numpy as np
 import sys
-
 """class myTableWidget(QtGui.QTableWidget):
 
    def keyPressEvent(self,event):
@@ -36,20 +33,6 @@ class COcalcMain(QMainWindow, ui_COcalcMain.Ui_MainWindow):
         self.apply.clicked.connect(self.Apply)
         self.reset.clicked.connect(self.Reset)
         self.patient = PatientData.Patient() #object that holds the data and does the calculations
-
-        """
-        self.HUvalues = myTableWidget(CO_Calculator)
-        self.HUvalues.setGeometry(QtCore.QRect(40, 20, 141, 571))
-        self.HUvalues.setMouseTracking(True)
-        self.HUvalues.setRowCount(20)
-        self.HUvalues.setColumnCount(1)
-        self.HUvalues.setObjectName(_fromUtf8("HUvalues"))
-        self.HUvalues.horizontalHeader().setVisible(False)
-        self.HUvalues.horizontalHeader().setCascadingSectionResizes(False)
-        self.HUvalues.verticalHeader().setVisible(True)
-        self.HUvalues.verticalHeader().setCascadingSectionResizes(False)
-        self.HUvalues.verticalHeader().setSortIndicatorShown(False)
-        """
 
     def Apply(self, parent=None):
         a = []
@@ -127,19 +110,18 @@ class COcalcMain(QMainWindow, ui_COcalcMain.Ui_MainWindow):
         fakeDataSD = np.std(fakeCOs)
         self.standardError.setPlainText(str(round(fakeDataSD, 3)))
 
-        #plot patient data and curve fit
-        self.plotwidget.axes.clear()
-        self.plotwidget.axes.autoscale(enable=True, axis='both', tight=None)
-        self.plotwidget.axes.hold(True)
-        self.plotwidget.axes.plot(xvalues, self.patient.data, '.', label = 'Patient Data')
-        self.plotwidget.axes.plot(self.patient.contTimes, self.patient.contData, '-', label = 'Curve Fit')
-        self.plotwidget.axes.legend()
 
-        self.plotwidget.axes.set_title(' ')
-        self.plotwidget.axes.set_xlabel('Time (s)')
-        self.plotwidget.axes.set_ylabel('Enhancement (HU)')
-        #self.plotwidget.axes.set_xticklabels(t) #range(0,xvalues)
-        self.plotwidget.draw()
+        # plot with pyqtgraph
+        #self.GraphicsView.setConfigOption('background', 'w')
+        #self.GraphicsView.setConfigOption('foreground', 'k')
+        self.GraphicsView.plot(title=' ')
+        self.GraphicsView.addLegend(size=(100, 40), offset=(0, 1))
+        self.GraphicsView.plot(self.patient.times, self.patient.data, name='Patient Data', pen=None, symbol='t',
+                             symbolPen=None, symbolSize=10, symbolBrush=(100, 100, 255, 100))
+        self.GraphicsView.plot(self.patient.contTimes, self.patient.contData, name='Curve Fit')
+        self.GraphicsView.setLabel('left', "Enhancement (HU)")
+        self.GraphicsView.setLabel('bottom', "Time (s)")
+
 
     def Reset(self, parent=None):
         self.HUvalues.clear()
@@ -169,14 +151,7 @@ class COcalcMain(QMainWindow, ui_COcalcMain.Ui_MainWindow):
         self.patient.AUC = 0
         self.patient.CO = 0
 
-        self.plotwidget.axes.hold(False)
-        clearx = []
-        cleary = []
-        self.plotwidget.axes.plot(clearx, cleary)
-        self.plotwidget.axes.set_title('')
-        self.plotwidget.axes.set_xlabel('')
-        self.plotwidget.axes.set_ylabel('')
-        self.plotwidget.draw()
+        self.GraphicsView.clear()
 
 
 

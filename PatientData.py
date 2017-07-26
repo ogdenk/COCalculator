@@ -25,7 +25,10 @@ class Patient:
         #self.resids = np.array([], dtype = float)
 
     def gammaFunc(self, tau, A, alpha, beta):  # evaluates the gamma variate function.
-        return A * tau ** alpha * np.exp(-tau / beta)
+        #t = np.array(A * tau ** alpha * np.exp(-tau / beta),dtype=np.float256)
+        #print("t")
+        #return t
+        return A* tau ** alpha * np.exp(-tau / beta)
 
     def GVCurveFit(self, shift, times, data):  # uses the curvefit function to get coeffs.
         popt, pcov = curve_fit(self.gammaFunc, times, data, maxfev=50000)
@@ -45,14 +48,14 @@ class Patient:
     def getCoeffs(self):  # uses the curvefit function to get coeffs.  Takes in the time shift as parameter (0 for now)
         self.findOffset()
         self.times = np.arange(-self.shift, -self.shift + len(self.data) * 2, 2) #shouldn't timeInterval replace '2'?
-        self.times = np.concatenate(([0],self.times))
-        self.data = np.concatenate(([0], self.data))
+        #self.times = np.concatenate(([0],self.times))
+        #self.data = np.concatenate(([0], self.data))
         index = np.where(self.times >= 0)
         temp = index[0][0]
         #self.shiftedTime = self.times[temp:]
         #self.shiftedData = self.data[temp:]
         #self.shiftedTime = self.times - self.shift
-        popt, pcov = curve_fit(self.gammaFunc, self.times, self.data, p0 = [2, 2, 2], method = {'lm'}) #maxfev=50000
+        popt, pcov = curve_fit(self.gammaFunc, self.times, self.data, p0 = [2, 2, 2], method = 'lm') #maxfev=50000
         #popt- optimal values for parameters (array), pcov- estimated covariance of popt (2D array)
         self.A, self.alpha, self.beta = popt[0], popt[1], popt[2]  # popt is the coeff array.
 
@@ -65,7 +68,7 @@ class Patient:
         self.R2 = 1 - (SSres / SStot)
 
     def findOffset(self): #Find the best offset time for the given data
-        self.shift = -2
+        self.shift = 0
         # NEED to do some checking on the data to make sure that there are values available
         # someting like IF(self.data.len() =0) then exit
         #if (self.data.len() = 0):
