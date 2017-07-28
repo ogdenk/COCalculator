@@ -27,9 +27,9 @@ import sys
 class COcalcMain(QMainWindow, ui_COcalcMain.Ui_MainWindow):
     def __init__(self, parent=None):
         super(COcalcMain, self).__init__(parent)
-        pqg.setConfigOption('background', 'w')
-        #pqg.mkColor(0,0,0,[255]) color changes here
-        pqg.setConfigOption('foreground', 'k')
+        pqg.setConfigOption('background', '#f0f0f0')
+        pqg.setConfigOption('foreground', '#2d3142')
+        pqg.mkPen(color=(0, 97, 255))
         self.setupUi(self)
         self.timeInterval.setPlainText("2") #want to allow user the option to change this value
         self.HUtoIodineConversion.setPlainText("24")
@@ -117,12 +117,13 @@ class COcalcMain(QMainWindow, ui_COcalcMain.Ui_MainWindow):
         # plot with pyqtgraph
         #self.GraphicsView.setConfigOption('background', 'w')
         #self.GraphicsView.setConfigOption('foreground', 'k')
-
+        #self.GraphicsView.setBackground('#0061ff')
+        #self.GraphicsView.setConfigOption('foreground','#0061ff')
         self.GraphicsView.plot(title=' ')
         self.GraphicsView.addLegend(size=(100, 40), offset=(0, 1))
         self.GraphicsView.plot(self.patient.times, self.patient.data, name='Patient Data', pen=None, symbol='t',
-                             symbolPen=None, symbolSize=10, symbolBrush=(100, 100, 255, 100))
-        self.GraphicsView.plot(self.patient.contTimes, self.patient.contData, name='Curve Fit')
+                             symbolPen=None, symbolSize=10, symbolBrush=(204, 63, 12, 255))
+        self.GraphicsView.plot(self.patient.contTimes, self.patient.contData, name='Curve Fit',pen=mkPen('b',width = 1))
         self.GraphicsView.setLabel('left', "Enhancement (HU)")
         self.GraphicsView.setLabel('bottom', "Time (s)")
 
