@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>CO Calculator</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLabel" name="label_CO">
@@ -38,6 +38,9 @@
     </property>
     <property name="mouseTracking">
      <bool>false</bool>
+    </property>
+    <property name="textInteractionFlags">
+     <set>Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
     </property>
    </widget>
    <widget class="QLabel" name="label_tinterval">
@@ -147,6 +150,9 @@
      <property name="mouseTracking">
       <bool>false</bool>
      </property>
+     <property name="textInteractionFlags">
+      <set>Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+     </property>
     </widget>
     <widget class="QPlainTextEdit" name="rsquared">
      <property name="geometry">
@@ -159,6 +165,9 @@
      </property>
      <property name="mouseTracking">
       <bool>false</bool>
+     </property>
+     <property name="textInteractionFlags">
+      <set>Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
      </property>
     </widget>
     <widget class="QPlainTextEdit" name="beta">
@@ -173,6 +182,9 @@
      <property name="mouseTracking">
       <bool>false</bool>
      </property>
+     <property name="textInteractionFlags">
+      <set>Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+     </property>
     </widget>
     <widget class="QPlainTextEdit" name="AUC">
      <property name="geometry">
@@ -185,6 +197,9 @@
      </property>
      <property name="mouseTracking">
       <bool>false</bool>
+     </property>
+     <property name="textInteractionFlags">
+      <set>Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
      </property>
     </widget>
     <widget class="QLabel" name="label_beta">
@@ -238,6 +253,9 @@
      <property name="mouseTracking">
       <bool>false</bool>
      </property>
+     <property name="textInteractionFlags">
+      <set>Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+     </property>
     </widget>
     <widget class="QLabel" name="label_AUC">
      <property name="geometry">
@@ -265,6 +283,9 @@
     <property name="mouseTracking">
      <bool>false</bool>
     </property>
+    <property name="textInteractionFlags">
+     <set>Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+    </property>
    </widget>
    <widget class="QPlainTextEdit" name="standardError">
     <property name="geometry">
@@ -277,6 +298,9 @@
     </property>
     <property name="mouseTracking">
      <bool>false</bool>
+    </property>
+    <property name="textInteractionFlags">
+     <set>Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
     </property>
    </widget>
    <widget class="QPlainTextEdit" name="HUtoIodineConversion">
@@ -406,6 +430,9 @@
     <property name="readOnly">
      <bool>true</bool>
     </property>
+    <property name="textInteractionFlags">
+     <set>Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+    </property>
    </widget>
    <widget class="QLabel" name="label_MTT">
     <property name="geometry">
@@ -476,7 +503,7 @@
      <x>0</x>
      <y>0</y>
      <width>755</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
   </widget>

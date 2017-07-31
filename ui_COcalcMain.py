@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'Cocalc_mainwindow.ui'
 #
-# Created by: PyQt5 UI code generator 5.7
+# Created by: PyQt5 UI code generator 5.9
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -20,6 +20,7 @@ class Ui_MainWindow(object):
         self.peakTime = QtWidgets.QPlainTextEdit(self.centralwidget)
         self.peakTime.setGeometry(QtCore.QRect(700, 450, 50, 24))
         self.peakTime.setMouseTracking(False)
+        self.peakTime.setTextInteractionFlags(QtCore.Qt.TextSelectableByKeyboard|QtCore.Qt.TextSelectableByMouse)
         self.peakTime.setObjectName("peakTime")
         self.label_tinterval = QtWidgets.QLabel(self.centralwidget)
         self.label_tinterval.setGeometry(QtCore.QRect(180, 520, 91, 20))
@@ -48,18 +49,22 @@ class Ui_MainWindow(object):
         self.alpha = QtWidgets.QPlainTextEdit(self.CurveFitResults)
         self.alpha.setGeometry(QtCore.QRect(20, 40, 40, 24))
         self.alpha.setMouseTracking(False)
+        self.alpha.setTextInteractionFlags(QtCore.Qt.TextSelectableByKeyboard|QtCore.Qt.TextSelectableByMouse)
         self.alpha.setObjectName("alpha")
         self.rsquared = QtWidgets.QPlainTextEdit(self.CurveFitResults)
         self.rsquared.setGeometry(QtCore.QRect(170, 40, 51, 24))
         self.rsquared.setMouseTracking(False)
+        self.rsquared.setTextInteractionFlags(QtCore.Qt.TextSelectableByKeyboard|QtCore.Qt.TextSelectableByMouse)
         self.rsquared.setObjectName("rsquared")
         self.beta = QtWidgets.QPlainTextEdit(self.CurveFitResults)
         self.beta.setGeometry(QtCore.QRect(70, 40, 40, 24))
         self.beta.setMouseTracking(False)
+        self.beta.setTextInteractionFlags(QtCore.Qt.TextSelectableByKeyboard|QtCore.Qt.TextSelectableByMouse)
         self.beta.setObjectName("beta")
         self.AUC = QtWidgets.QPlainTextEdit(self.CurveFitResults)
         self.AUC.setGeometry(QtCore.QRect(240, 40, 141, 24))
         self.AUC.setMouseTracking(False)
+        self.AUC.setTextInteractionFlags(QtCore.Qt.TextSelectableByKeyboard|QtCore.Qt.TextSelectableByMouse)
         self.AUC.setObjectName("AUC")
         self.label_beta = QtWidgets.QLabel(self.CurveFitResults)
         self.label_beta.setGeometry(QtCore.QRect(80, 20, 31, 16))
@@ -73,6 +78,7 @@ class Ui_MainWindow(object):
         self.t0 = QtWidgets.QPlainTextEdit(self.CurveFitResults)
         self.t0.setGeometry(QtCore.QRect(120, 40, 40, 24))
         self.t0.setMouseTracking(False)
+        self.t0.setTextInteractionFlags(QtCore.Qt.TextSelectableByKeyboard|QtCore.Qt.TextSelectableByMouse)
         self.t0.setObjectName("t0")
         self.label_AUC = QtWidgets.QLabel(self.CurveFitResults)
         self.label_AUC.setGeometry(QtCore.QRect(230, 20, 31, 16))
@@ -80,10 +86,12 @@ class Ui_MainWindow(object):
         self.MTT = QtWidgets.QPlainTextEdit(self.centralwidget)
         self.MTT.setGeometry(QtCore.QRect(700, 480, 50, 24))
         self.MTT.setMouseTracking(False)
+        self.MTT.setTextInteractionFlags(QtCore.Qt.TextSelectableByKeyboard|QtCore.Qt.TextSelectableByMouse)
         self.MTT.setObjectName("MTT")
         self.standardError = QtWidgets.QPlainTextEdit(self.centralwidget)
         self.standardError.setGeometry(QtCore.QRect(699, 510, 51, 24))
         self.standardError.setMouseTracking(False)
+        self.standardError.setTextInteractionFlags(QtCore.Qt.TextSelectableByKeyboard|QtCore.Qt.TextSelectableByMouse)
         self.standardError.setObjectName("standardError")
         self.HUtoIodineConversion = QtWidgets.QPlainTextEdit(self.centralwidget)
         self.HUtoIodineConversion.setGeometry(QtCore.QRect(360, 560, 40, 24))
@@ -117,6 +125,7 @@ class Ui_MainWindow(object):
         self.cardiacOutput.setGeometry(QtCore.QRect(700, 420, 50, 24))
         self.cardiacOutput.setMouseTracking(False)
         self.cardiacOutput.setReadOnly(True)
+        self.cardiacOutput.setTextInteractionFlags(QtCore.Qt.TextSelectableByKeyboard|QtCore.Qt.TextSelectableByMouse)
         self.cardiacOutput.setObjectName("cardiacOutput")
         self.label_MTT = QtWidgets.QLabel(self.centralwidget)
         self.label_MTT.setGeometry(QtCore.QRect(580, 480, 111, 16))
@@ -136,7 +145,7 @@ class Ui_MainWindow(object):
         self.GraphicsView.setObjectName("GraphicsView")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 755, 21))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 755, 22))
         self.menubar.setObjectName("menubar")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
@@ -148,7 +157,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "CO Calculator"))
         self.label_CO.setText(_translate("MainWindow", "Cardiac Output (L/min)"))
         self.label_tinterval.setText(_translate("MainWindow", "Time Interval (s)"))
         self.label_baseline.setText(_translate("MainWindow", "Baseline"))

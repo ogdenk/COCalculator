@@ -7,7 +7,6 @@ from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QApplication,QMainWindow
 import pyqtgraph as pqg
 from pyqtgraph import *
-
 from COcalcMainWindow import COcalcMain
 import ui_COcalcMain
 

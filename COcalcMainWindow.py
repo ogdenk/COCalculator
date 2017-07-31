@@ -1,16 +1,21 @@
 from PyQt5.QtGui import *
 from PyQt5 import QtCore, QtGui
 #import QWidget
-from PyQt5.QtWidgets import QMainWindow
+from PyQt5.QtWidgets import *
 import pyqtgraph as pqg
 from pyqtgraph import *
+from scipy.linalg._solve_toeplitz import float64
+import time
 import ui_COcalcMain
+import tkinter
+from tkinter import messagebox
 
 import PatientData
 from scipy.optimize import curve_fit
-
 import numpy as np
 import sys
+import ErrorMain
+
 """class myTableWidget(QtGui.QTableWidget):
 
    def keyPressEvent(self,event):
@@ -33,18 +38,89 @@ class COcalcMain(QMainWindow, ui_COcalcMain.Ui_MainWindow):
         self.setupUi(self)
         self.timeInterval.setPlainText("2") #want to allow user the option to change this value
         self.HUtoIodineConversion.setPlainText("24")
-        self.apply.clicked.connect(self.Apply)
+        self.apply.clicked.connect(self.ApplyChecker)
         self.reset.clicked.connect(self.Reset)
         self.patient = PatientData.Patient() #object that holds the data and does the calculations
 
+
+    def ApplyChecker(self,parent = None):
+
+        check = True
+        error = ""
+
+        #Time interval checks
+        ############################################
+        if(self.timeInterval.toPlainText() == ""):
+             check = False
+             error += "Time interval must be entered\n"
+        else:
+            try:
+                ti = float(self.timeInterval.toPlainText())
+                if ti <= 0:
+                    error += "Time interval must be greater than zero\n"
+                    check = False
+            except ValueError:
+                error +="Time interval must consist only of numbers"
+                check = False
+
+        #baseline checks
+        #############################################
+        if(self.baselineInput.toPlainText()==""):
+            check = False
+            error += "Baseline must be entered\n"
+
+        else:
+            try:
+                b= float(self.baselineInput.toPlainText() )
+            except ValueError:
+                error+="Baseline must consist only of numbers\n"
+                check = False
+
+        #HUValues
+        ##########################################
+        try:
+            a = []
+            self.clearFocus()
+            allRows = self.HUvalues.rowCount()
+            for i in np.arange(0, allRows + 1, 1):
+                temp = self.HUvalues.item(i, 0)
+                if temp:
+                    a.append(float(temp.text()))
+            a = np.array(a)  # type float
+        except ValueError:
+            check = False
+            error+= "Table Inputs must consist only of numbers\n"
+
+        #Final check
+        #############################################
+        if check == True:
+             self.Apply()
+        else:
+            #print("error box popup:\n", error)
+
+            msgBox = QMessageBox()
+            msgBox.setText("There was an error:")
+            msgBox.setInformativeText(error)
+            msgBox.setStandardButtons(QMessageBox.Ok)
+            msgBox.setDefaultButton(QMessageBox.Ok)
+            msgBox.exec_()
+
+            #ErrorMain.ErrorStart(error)
+
+
     def Apply(self, parent=None):
         a = []
+        a_temp = []
+        self.clearFocus()
         allRows = self.HUvalues.rowCount()
         for i in np.arange(0, allRows+1, 1):
             temp = self.HUvalues.item(i,0)
             if temp:
                 a.append(float(temp.text()))
+                a_temp.append(int(temp.text()))
         a = np.array(a) #type float
+        a_temp = np.array(a_temp)
+        np.savetxt("a_array.txt",a_temp)
 
         b = float(self.baselineInput.toPlainText())
 
@@ -74,7 +150,7 @@ class COcalcMain(QMainWindow, ui_COcalcMain.Ui_MainWindow):
             temp2 = x.item(j)
             xvalues.append(temp2)
         xvalues = np.array(xvalues)
-        xvalues = xvalues  # + self.patient.shift
+        #xvalues = xvalues  # + self.patient.shift
 
         # estimate standard error of CO calculation with monte carlo simulation
         #first calculate residuals & st. dev.
@@ -105,6 +181,8 @@ class COcalcMain(QMainWindow, ui_COcalcMain.Ui_MainWindow):
                 fakeDataSet[l] = fakeDataPt
             popt, pcov = curve_fit(self.patient.gammaFunc, self.times, fakeDataSet,maxfev=5000)
             mcA, mcAlpha, mcBeta = popt[0], popt[1], popt[2]
+            if(mcAlpha <0):
+                print('curve fit in MC returned negative Alpha')
             mcContData = mcA * (self.patient.contTimes ** mcAlpha) * np.exp(-self.patient.contTimes / mcBeta)
             mcAUC = np.trapz([mcContData], x=[self.patient.contTimes])
             Imass = 0.3 * 350 * 75
@@ -126,6 +204,7 @@ class COcalcMain(QMainWindow, ui_COcalcMain.Ui_MainWindow):
         self.GraphicsView.plot(self.patient.contTimes, self.patient.contData, name='Curve Fit',pen=mkPen('b',width = 1))
         self.GraphicsView.setLabel('left', "Enhancement (HU)")
         self.GraphicsView.setLabel('bottom', "Time (s)")
+        self.GraphicsView.viewRect()
 
 
     def Reset(self, parent=None):
@@ -157,6 +236,7 @@ class COcalcMain(QMainWindow, ui_COcalcMain.Ui_MainWindow):
         self.patient.CO = 0
 
         self.GraphicsView.clear()
+
 
 
 
